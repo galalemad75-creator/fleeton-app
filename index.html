@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FleetOn — Fleet Management Platform 🚗</title>
+  <title>FleetOn — Fleet Management Platform</title>
   <meta name="description" content="FleetOn - Smart Fleet Management Platform with real-time GPS tracking, trip logging, maintenance alerts and team communication.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Arabic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    
+
     :root {
       --bg-primary: #0a0e1a;
       --bg-secondary: #111827;
       --bg-card: #1a2035;
       --bg-card-hover: #1f2847;
+      --bg-input: #151d30;
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -26,569 +27,325 @@
       --orange: #f59e0b;
       --purple: #a855f7;
       --cyan: #06b6d4;
+      --red: #ef4444;
       --border: #1e293b;
       --radius: 16px;
       --radius-sm: 10px;
+      --radius-xs: 8px;
+      --shadow: 0 20px 40px rgba(0,0,0,0.3);
+      --font: 'Inter', 'Noto Sans Arabic', -apple-system, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-    
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font);
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
       line-height: 1.6;
+      transition: background 0.4s, color 0.4s;
     }
 
-    /* ===== Animated Background ===== */
+    body[dir="rtl"] { font-family: 'Noto Sans Arabic', 'Inter', sans-serif; }
+
+    /* ===== Animated BG ===== */
     .bg-grid {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.15), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168, 85, 247, 0.08), transparent),
-        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(6, 182, 212, 0.06), transparent);
-      pointer-events: none;
-      z-index: 0;
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.12), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(168,85,247,0.06), transparent),
+        radial-gradient(ellipse 50% 30% at 20% 80%, rgba(6,182,212,0.04), transparent);
+      pointer-events: none; z-index: 0;
     }
-
     .bg-grid::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
-                         linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+                         linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
     }
 
-    /* ===== Floating Particles ===== */
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      opacity: 0;
-      animation: float-particle linear infinite;
-    }
-    @keyframes float-particle {
-      0% { opacity: 0; transform: translateY(100vh) scale(0); }
-      10% { opacity: 0.6; }
-      90% { opacity: 0.6; }
-      100% { opacity: 0; transform: translateY(-10vh) scale(1); }
-    }
-
-    /* ===== Loading Screen ===== */
+    /* ===== Loader ===== */
     .loader {
-      position: fixed;
-      inset: 0;
-      background: var(--bg-primary);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      position: fixed; inset: 0; background: var(--bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; transition: opacity 0.6s, visibility 0.6s;
     }
     .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-icon {
-      font-size: 64px;
-      animation: loader-bounce 1s ease-in-out infinite;
-    }
+    .loader-icon { font-size: 64px; animation: loader-bounce 1s ease-in-out infinite; }
     @keyframes loader-bounce {
-      0%, 100% { transform: translateY(0) scale(1); }
+      0%,100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-20px) scale(1.1); }
     }
     .loader-bar {
-      width: 200px;
-      height: 3px;
-      background: var(--bg-card);
-      border-radius: 3px;
-      margin-top: 24px;
-      overflow: hidden;
+      width: 200px; height: 3px; background: var(--bg-card);
+      border-radius: 3px; margin-top: 24px; overflow: hidden;
     }
     .loader-bar::after {
-      content: '';
-      display: block;
-      width: 60%;
-      height: 100%;
+      content: ''; display: block; width: 60%; height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--purple));
-      border-radius: 3px;
-      animation: loader-progress 1.5s ease-in-out infinite;
+      border-radius: 3px; animation: loader-progress 1.5s ease-in-out infinite;
     }
     @keyframes loader-progress {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(260%); }
+      0% { transform: translateX(-100%); } 100% { transform: translateX(260%); }
     }
 
-    /* ===== Navigation ===== */
+    /* ===== Nav ===== */
     .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 16px 24px;
-      transition: all 0.3s ease;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 12px 24px; transition: all 0.3s;
     }
     .nav.scrolled {
-      background: rgba(10, 14, 26, 0.85);
+      background: rgba(10,14,26,0.9);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 22px;
-      text-decoration: none;
-      color: var(--text-primary);
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: 22px; text-decoration: none; color: var(--text-primary);
     }
     .nav-brand span { font-size: 28px; }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
+    .nav-center {
+      display: flex; gap: 28px; list-style: none;
     }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.2s;
-      position: relative;
+    .nav-center a {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 14px; font-weight: 500; transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s;
+    .nav-center a:hover { color: var(--text-primary); }
+    .nav-actions {
+      display: flex; align-items: center; gap: 10px;
     }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta {
-      background: var(--accent) !important;
-      color: #fff !important;
-      padding: 8px 20px !important;
-      border-radius: 8px !important;
-      font-weight: 600 !important;
-      transition: all 0.2s !important;
+
+    /* Toggle Buttons */
+    .icon-btn {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text-secondary); width: 40px; height: 40px;
+      border-radius: var(--radius-xs); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; transition: all 0.2s; font-family: var(--font);
     }
-    .nav-cta:hover { background: var(--accent-hover) !important; transform: translateY(-1px); }
-    .nav-cta::after { display: none !important; }
-    
+    .icon-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); border-color: var(--accent); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius-xs);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: all 0.25s; cursor: pointer; border: none; font-family: var(--font);
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text-secondary); border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text-primary); border-color: var(--accent); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: #fff; box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
+    .btn-secondary {
+      background: var(--bg-card); color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--bg-card-hover); border-color: var(--accent); transform: translateY(-2px); }
+    .btn-download {
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      color: #fff; font-size: 16px; padding: 16px 32px;
+      border-radius: 12px; box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    }
+    .btn-download:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(34,197,94,0.4); }
+    .btn-apple {
+      background: #000; color: #fff; font-size: 16px; padding: 16px 32px;
+      border-radius: 12px;
+    }
+    .btn-apple:hover { transform: translateY(-3px); background: #1a1a1a; }
+
     .mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      font-size: 24px;
-      cursor: pointer;
+      display: none; background: none; border: none;
+      color: var(--text-primary); font-size: 24px; cursor: pointer;
     }
 
     /* ===== Hero ===== */
     .hero {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 160px 24px 100px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      min-height: 100vh;
+      position: relative; z-index: 1; max-width: 1200px;
+      margin: 0 auto; padding: 140px 24px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; min-height: 100vh;
     }
     .hero-content { max-width: 560px; }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      color: var(--accent);
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2);
+      color: var(--accent); padding: 6px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; margin-bottom: 24px;
       animation: fadeInUp 0.6s ease both;
     }
     .hero-badge .dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse-dot 2s ease-in-out infinite;
+      width: 8px; height: 8px; background: var(--green);
+      border-radius: 50%; animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
+      0%,100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(0.8); }
     }
     .hero h1 {
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
+      font-size: clamp(38px, 5.5vw, 64px); font-weight: 900;
+      line-height: 1.08; letter-spacing: -2px; margin-bottom: 20px;
       animation: fadeInUp 0.6s ease 0.1s both;
     }
     .hero h1 .gradient {
-      background: linear-gradient(135deg, var(--accent), var(--cyan), var(--purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: linear-gradient(135deg, var(--accent), var(--cyan), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     .hero-desc {
-      font-size: 18px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 12px;
+      font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px;
       animation: fadeInUp 0.6s ease 0.2s both;
     }
-    .hero-desc-ar {
-      font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 36px;
-      direction: rtl;
-      animation: fadeInUp 0.6s ease 0.25s both;
-    }
     .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px;
       animation: fadeInUp 0.6s ease 0.3s both;
     }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.25s ease;
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
+    .hero-trust {
+      display: flex; align-items: center; gap: 16px;
+      animation: fadeInUp 0.6s ease 0.4s both;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #6366f1);
-      color: #fff;
-      box-shadow: 0 4px 20px var(--accent-glow);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--accent-glow);
-    }
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .hero-trust .stars { font-size: 16px; color: var(--orange); }
+    .hero-trust p { font-size: 13px; color: var(--text-muted); }
 
-    /* Hero Visual / Phone Mockup */
+    /* Phone Mockup */
     .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeInUp 0.8s ease 0.4s both;
+      display: flex; justify-content: center; align-items: center;
+      animation: fadeInUp 0.8s ease 0.3s both;
     }
     .phone-mockup {
-      position: relative;
-      width: 280px;
-      height: 560px;
+      position: relative; width: 280px; height: 560px;
       background: linear-gradient(145deg, #1e293b, #0f172a);
-      border-radius: 40px;
-      border: 3px solid #334155;
-      overflow: hidden;
-      box-shadow: 
-        0 0 0 1px rgba(255,255,255,0.05),
-        0 25px 60px rgba(0,0,0,0.5),
-        0 0 100px rgba(59,130,246,0.1);
+      border-radius: 40px; border: 3px solid #334155; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 25px 60px rgba(0,0,0,0.5), 0 0 100px rgba(59,130,246,0.1);
       transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-      transition: transform 0.5s ease;
+      transition: transform 0.5s;
     }
-    .phone-mockup:hover {
-      transform: perspective(1000px) rotateY(0) rotateX(0);
-    }
+    .phone-mockup:hover { transform: perspective(1000px) rotateY(0) rotateX(0); }
     .phone-notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 28px;
-      background: #000;
-      border-radius: 0 0 16px 16px;
-      z-index: 5;
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 28px; background: #000; border-radius: 0 0 16px 16px; z-index: 5;
     }
     .phone-screen {
-      position: absolute;
-      inset: 8px;
-      border-radius: 32px;
-      overflow: hidden;
+      position: absolute; inset: 8px; border-radius: 32px; overflow: hidden;
       background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 30%, #111827 100%);
     }
-    .phone-screen-content {
-      padding: 40px 16px 16px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+    .phone-screen-content { padding: 40px 16px 16px; height: 100%; display: flex; flex-direction: column; }
     .phone-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
     }
-    .phone-header h3 {
-      font-size: 16px;
-      font-weight: 700;
-    }
+    .phone-header h3 { font-size: 16px; font-weight: 700; }
     .phone-header .avatar {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       background: linear-gradient(135deg, var(--accent), var(--purple));
       border-radius: 50%;
     }
     .phone-map {
-      flex: 1;
-      background: 
-        radial-gradient(circle at 30% 40%, rgba(59,130,246,0.2) 0%, transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(34,197,94,0.15) 0%, transparent 40%),
-        linear-gradient(135deg, #0f1d32, #162033);
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 12px;
+      flex: 1; border-radius: 16px; position: relative; overflow: hidden; margin-bottom: 12px;
+      background: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.2) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 60%, rgba(34,197,94,0.15) 0%, transparent 40%),
+                  linear-gradient(135deg, #0f1d32, #162033);
     }
     .phone-map::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+                         linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
       background-size: 20px 20px;
     }
     .map-pin {
-      position: absolute;
-      font-size: 20px;
+      position: absolute; font-size: 20px;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
       animation: pin-bob 3s ease-in-out infinite;
     }
-    .map-pin:nth-child(1) { top: 30%; left: 25%; animation-delay: 0s; }
+    .map-pin:nth-child(1) { top: 30%; left: 25%; }
     .map-pin:nth-child(2) { top: 50%; left: 60%; animation-delay: 1s; }
     .map-pin:nth-child(3) { top: 65%; left: 35%; animation-delay: 2s; }
-    .map-route {
-      position: absolute;
-      top: 32%;
-      left: 28%;
-      width: 35%;
-      height: 20%;
-      border: 2px dashed rgba(59,130,246,0.3);
-      border-radius: 50%;
-      transform: rotate(-20deg);
-    }
-    @keyframes pin-bob {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    .phone-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+    @keyframes pin-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .phone-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .phone-stat {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
+      background: rgba(255,255,255,0.05); border-radius: 10px; padding: 10px; text-align: center;
     }
-    .phone-stat .val {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-    .phone-stat .lbl {
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* Glow rings behind phone */
+    .phone-stat .val { font-size: 18px; font-weight: 800; color: var(--accent); }
+    .phone-stat .lbl { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
     .phone-glow {
-      position: absolute;
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
+      position: absolute; width: 350px; height: 350px; border-radius: 50%;
       border: 1px solid rgba(59,130,246,0.1);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: glow-rotate 20s linear infinite;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      animation: glow-rotate 20s linear infinite; pointer-events: none;
     }
     .phone-glow:nth-child(2) {
-      width: 420px;
-      height: 420px;
-      border-color: rgba(168,85,247,0.06);
-      animation-duration: 30s;
-      animation-direction: reverse;
+      width: 420px; height: 420px; border-color: rgba(168,85,247,0.06);
+      animation-duration: 30s; animation-direction: reverse;
     }
-    @keyframes glow-rotate {
-      from { transform: translate(-50%, -50%) rotate(0); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
+    @keyframes glow-rotate { from { transform: translate(-50%,-50%) rotate(0); } to { transform: translate(-50%,-50%) rotate(360deg); } }
 
-    /* ===== Stats Bar ===== */
+    /* ===== Stats ===== */
     .stats-bar {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: -40px auto 80px;
-      padding: 0 24px;
+      position: relative; z-index: 1; max-width: 1000px;
+      margin: -20px auto 80px; padding: 0 24px;
     }
     .stats-inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      background: var(--bg-card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden;
     }
-    .stat-item {
-      padding: 28px 20px;
-      text-align: center;
-      transition: background 0.3s;
-    }
+    .stat-item { padding: 28px 20px; text-align: center; transition: background 0.3s; }
     .stat-item:hover { background: var(--bg-card-hover); }
     .stat-number {
-      font-size: 32px;
-      font-weight: 800;
+      font-size: 32px; font-weight: 800;
       background: linear-gradient(135deg, var(--accent), var(--cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
-    /* ===== Section Styles ===== */
+    /* ===== Sections ===== */
     section {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 24px;
+      position: relative; z-index: 1; max-width: 1200px;
+      margin: 0 auto; padding: 80px 24px;
     }
     .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;
     }
-    .section-label::before {
-      content: '';
-      width: 24px;
-      height: 2px;
-      background: var(--accent);
-    }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--accent); }
     .section-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
+      font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -1px; margin-bottom: 16px;
     }
     .section-desc {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      line-height: 1.7;
+      font-size: 17px; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
     }
 
     /* ===== Features Grid ===== */
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 60px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px;
     }
     .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; transition: all 0.3s; position: relative; overflow: hidden;
     }
     .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      opacity: 0; transition: opacity 0.3s;
     }
     .feature-card:hover {
-      background: var(--bg-card-hover);
-      border-color: rgba(59,130,246,0.3);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      background: var(--bg-card-hover); border-color: rgba(59,130,246,0.3);
+      transform: translateY(-4px); box-shadow: var(--shadow);
     }
     .feature-card:hover::before { opacity: 1; }
     .feature-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      margin-bottom: 20px;
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
     }
     .feature-icon.blue { background: rgba(59,130,246,0.15); }
     .feature-icon.green { background: rgba(34,197,94,0.15); }
@@ -596,261 +353,178 @@
     .feature-icon.purple { background: rgba(168,85,247,0.15); }
     .feature-icon.cyan { background: rgba(6,182,212,0.15); }
     .feature-icon.red { background: rgba(239,68,68,0.15); }
-    .feature-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
-    /* ===== Roles Section ===== */
+    /* ===== Roles ===== */
     .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      margin-top: 60px;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 60px;
     }
     .role-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 20px;
-      text-align: center;
-      transition: all 0.3s ease;
-      cursor: default;
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center; transition: all 0.3s;
     }
-    .role-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .role-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .role-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .role-card p {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
+    .role-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .role-icon { font-size: 40px; margin-bottom: 16px; display: block; }
+    .role-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .role-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
     .role-card:nth-child(1) { border-top: 2px solid var(--accent); }
     .role-card:nth-child(2) { border-top: 2px solid var(--green); }
     .role-card:nth-child(3) { border-top: 2px solid var(--orange); }
     .role-card:nth-child(4) { border-top: 2px solid var(--purple); }
     .role-card:nth-child(5) { border-top: 2px solid var(--cyan); }
 
-    /* ===== Tech Stack ===== */
-    .tech-section {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    /* ===== Auth Section ===== */
+    .auth-section {
+      position: relative; z-index: 1; max-width: 1200px;
+      margin: 0 auto; padding: 80px 24px;
     }
-    .tech-section .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 24px;
+    .auth-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px;
+      align-items: start;
     }
-    .tech-grid {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-top: 40px;
+    .auth-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 40px; transition: all 0.3s;
     }
-    .tech-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      padding: 24px 32px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      min-width: 140px;
-      transition: all 0.3s;
+    .auth-card:hover { border-color: rgba(59,130,246,0.3); box-shadow: var(--shadow); }
+    .auth-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .auth-card .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--text-secondary); margin-bottom: 6px;
     }
-    .tech-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
+    .form-group input {
+      width: 100%; padding: 12px 16px; background: var(--bg-input);
+      border: 1px solid var(--border); border-radius: var(--radius-xs);
+      color: var(--text-primary); font-size: 14px; font-family: var(--font);
+      transition: border-color 0.2s; outline: none;
     }
-    .tech-item .icon { font-size: 36px; }
-    .tech-item .name {
-      font-size: 14px;
-      font-weight: 600;
+    .form-group input:focus { border-color: var(--accent); }
+    .form-group input::placeholder { color: var(--text-muted); }
+    .form-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 20px;
     }
+    .form-row label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-muted); cursor: pointer;
+    }
+    .form-row a { font-size: 13px; color: var(--accent); text-decoration: none; }
+    .form-row a:hover { text-decoration: underline; }
+    .checkbox {
+      width: 16px; height: 16px; accent-color: var(--accent);
+    }
+    .auth-card .btn { width: 100%; justify-content: center; font-size: 15px; padding: 14px; }
+    .auth-divider {
+      display: flex; align-items: center; gap: 16px; margin: 24px 0; color: var(--text-muted); font-size: 13px;
+    }
+    .auth-divider::before, .auth-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .social-login {
+      display: flex; gap: 12px;
+    }
+    .social-btn {
+      flex: 1; padding: 12px; background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-xs); cursor: pointer; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; color: var(--text-primary);
+    }
+    .social-btn:hover { border-color: var(--accent); background: var(--bg-card-hover); }
 
-    /* ===== CTA Section ===== */
-    .cta-section {
-      text-align: center;
-      padding: 120px 24px;
+    /* ===== CTA / Download ===== */
+    .download-section {
+      position: relative; z-index: 1; max-width: 1200px;
+      margin: 0 auto; padding: 120px 24px; text-align: center;
     }
-    .cta-box {
-      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1));
-      border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 24px;
-      padding: 64px 40px;
-      max-width: 700px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
+    .download-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(34,197,94,0.08));
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 24px; padding: 64px 40px;
+      max-width: 700px; margin: 0 auto; position: relative; overflow: hidden;
     }
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.08), transparent 50%);
+    .download-box::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(59,130,246,0.06), transparent 50%);
       animation: cta-glow 8s ease-in-out infinite;
     }
     @keyframes cta-glow {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(10%, 10%); }
+      0%,100% { transform: translate(0,0); } 50% { transform: translate(10%,10%); }
     }
-    .cta-box h2 {
-      font-size: 36px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      position: relative;
-    }
-    .cta-box p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      position: relative;
-    }
-    .cta-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-    }
+    .download-box h2 { font-size: 36px; font-weight: 800; margin-bottom: 16px; position: relative; }
+    .download-box p { font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; position: relative; }
+    .download-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; }
 
     /* ===== Footer ===== */
     .footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 48px 24px;
+      position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 48px 24px;
     }
     .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
     }
     .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 20px; font-weight: 800; margin-bottom: 12px;
     }
     .footer-brand span { font-size: 24px; }
     .footer-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 280px;
+      font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 280px;
     }
     .footer h4 {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 16px;
     }
     .footer ul { list-style: none; }
     .footer li { margin-bottom: 10px; }
-    .footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
+    .footer a { color: var(--text-muted); text-decoration: none; font-size: 14px; transition: color 0.2s; }
     .footer a:hover { color: var(--accent); }
     .footer-bottom {
-      max-width: 1200px;
-      margin: 32px auto 0;
-      padding-top: 24px;
+      max-width: 1200px; margin: 32px auto 0; padding-top: 24px;
       border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    .footer-socials {
-      display: flex;
-      gap: 16px;
-    }
-    .footer-socials a {
-      color: var(--text-muted);
-      font-size: 18px;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .footer-socials a:hover {
-      color: var(--accent);
-      transform: translateY(-2px);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: var(--text-muted);
     }
 
-    /* ===== Scroll Animations ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* ===== Scroll Reveal ===== */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ===== RTL ===== */
+    [dir="rtl"] .section-label::before { display: none; }
+    [dir="rtl"] .section-label::after { content: ''; width: 24px; height: 2px; background: var(--accent); }
+    [dir="rtl"] .hero-content { text-align: right; }
+    [dir="rtl"] .hero-actions { justify-content: flex-end; }
+    [dir="rtl"] .hero-trust { justify-content: flex-end; }
 
     /* ===== Responsive ===== */
     @media (max-width: 1024px) {
-      .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding-top: 140px; }
+      .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding-top: 120px; }
       .hero-content { max-width: 100%; margin: 0 auto; }
-      .hero-desc-ar { direction: ltr; }
       .hero-actions { justify-content: center; }
+      .hero-trust { justify-content: center; }
       .hero-visual { margin-top: 40px; }
       .phone-mockup { transform: none; }
       .phone-mockup:hover { transform: scale(1.02); }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .roles-grid { grid-template-columns: repeat(3, 1fr); }
+      .auth-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
+      [dir="rtl"] .hero-content { text-align: center; }
+      [dir="rtl"] .hero-actions { justify-content: center; }
+      [dir="rtl"] .hero-trust { justify-content: center; }
     }
     @media (max-width: 768px) {
-      .nav-links { display: none; }
+      .nav-center { display: none; }
       .mobile-toggle { display: block; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(10, 14, 26, 0.95);
-        backdrop-filter: blur(20px);
-        padding: 20px;
-        border-bottom: 1px solid var(--border);
+      .nav-center.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0;
+        background: rgba(10,14,26,0.95); backdrop-filter: blur(20px);
+        padding: 20px; border-bottom: 1px solid var(--border);
       }
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .features-grid { grid-template-columns: 1fr; }
@@ -858,85 +532,77 @@
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
       .phone-mockup { width: 240px; height: 480px; }
-    }
-    @media (max-width: 480px) {
-      .stats-inner { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 20px 12px; }
-      .stat-number { font-size: 24px; }
-      .hero h1 { letter-spacing: -1px; }
+      .nav-actions .btn { display: none; }
     }
 
-    /* ===== Light Mode ===== */
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg-primary: #f8fafc;
-        --bg-secondary: #f1f5f9;
-        --bg-card: #ffffff;
-        --bg-card-hover: #f8fafc;
-        --text-primary: #0f172a;
-        --text-secondary: #475569;
-        --text-muted: #94a3b8;
-        --border: #e2e8f0;
-      }
-      .nav.scrolled { background: rgba(248,250,252,0.85); }
-      .bg-grid::after { background-image: linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px); }
-      .phone-mockup { box-shadow: 0 25px 60px rgba(0,0,0,0.15), 0 0 100px rgba(59,130,246,0.05); }
-      .feature-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-      .role-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    /* ===== Particles ===== */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .particle {
+      position: absolute; width: 4px; height: 4px; background: var(--accent);
+      border-radius: 50%; opacity: 0; animation: float-particle linear infinite;
+    }
+    @keyframes float-particle {
+      0% { opacity: 0; transform: translateY(100vh) scale(0); }
+      10% { opacity: 0.5; } 90% { opacity: 0.5; }
+      100% { opacity: 0; transform: translateY(-10vh) scale(1); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Loading Screen -->
+  <!-- Loader -->
   <div class="loader" id="loader">
     <div class="loader-icon">🚗</div>
     <div class="loader-bar"></div>
   </div>
 
-  <!-- Background -->
+  <!-- BG -->
   <div class="bg-grid"></div>
   <div class="particles" id="particles"></div>
 
-  <!-- Navigation -->
+  <!-- ===== NAV ===== -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-brand">
-        <span>🚗</span> FleetOn
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#roles">Roles</a></li>
-        <li><a href="#tech">Tech Stack</a></li>
-        <li><a href="https://github.com/galalemad75-creator/fleeton-app" class="nav-cta" target="_blank">GitHub →</a></li>
+      <a href="#" class="nav-brand"><span>🚗</span> FleetOn</a>
+      <ul class="nav-center" id="navLinks">
+        <li><a href="#features" data-i18n="nav.features">Features</a></li>
+        <li><a href="#roles" data-i18n="nav.roles">Roles</a></li>
+        <li><a href="#download" data-i18n="nav.download">Download</a></li>
       </ul>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">☰</button>
+      <div class="nav-actions">
+        <!-- 🌐 Language Toggle -->
+        <button class="icon-btn" id="langToggle" title="العربية / English" aria-label="Toggle Language">🌐</button>
+        <!-- 🌙 Dark/Light Toggle -->
+        <button class="icon-btn" id="themeToggle" title="Dark / Light" aria-label="Toggle Theme">🌙</button>
+        <!-- 👤 Login -->
+        <a href="#auth" class="btn btn-ghost" data-i18n="nav.login">Log In</a>
+        <!-- 📥 Sign Up -->
+        <a href="#auth" class="btn btn-primary" data-i18n="nav.signup">Sign Up</a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero -->
+  <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        Now in Development
+        <span data-i18n="hero.badge">Now Available — Download Free</span>
       </div>
-      <h1>Smart Fleet<br><span class="gradient">Management</span></h1>
-      <p class="hero-desc">
-        Track vehicles in real-time, log trips with odometer scanning, manage maintenance schedules, and coordinate your team — all from one powerful platform.
-      </p>
-      <p class="hero-desc-ar">منصة ذكية لإدارة الأسطول — تتبع المركبات، تسجيل الرحلات، الصيانة، والتواصل مع الفريق</p>
+      <h1 data-i18n="hero.title">Manage Your Fleet<br><span class="gradient">Smarter, Not Harder</span></h1>
+      <p class="hero-desc" data-i18n="hero.desc">Track vehicles in real-time, log trips automatically, schedule maintenance, and keep your entire team connected — all from one powerful app.</p>
       <div class="hero-actions">
-        <a href="https://github.com/galalemad75-creator/fleeton-app" class="btn btn-primary" target="_blank">
-          ⭐ View on GitHub
-        </a>
-        <a href="#features" class="btn btn-secondary">
-          Explore Features ↓
-        </a>
+        <a href="#download" class="btn btn-download" data-i18n="hero.download">📥 Download Free</a>
+        <a href="#features" class="btn btn-secondary" data-i18n="hero.explore">Explore Features ↓</a>
+      </div>
+      <div class="hero-trust">
+        <span class="stars">⭐⭐⭐⭐⭐</span>
+        <p data-i18n="hero.trust">Trusted by fleet managers worldwide</p>
       </div>
     </div>
     <div class="hero-visual">
-      <div style="position: relative;">
+      <div style="position:relative;">
         <div class="phone-glow"></div>
         <div class="phone-glow"></div>
         <div class="phone-mockup">
@@ -944,24 +610,17 @@
           <div class="phone-screen">
             <div class="phone-screen-content">
               <div class="phone-header">
-                <h3>FleetOn Dashboard</h3>
+                <h3 data-i18n="hero.phoneHeader">FleetOn Dashboard</h3>
                 <div class="avatar"></div>
               </div>
               <div class="phone-map">
-                <div class="map-route"></div>
                 <div class="map-pin">🚛</div>
                 <div class="map-pin">🚐</div>
                 <div class="map-pin">🚗</div>
               </div>
               <div class="phone-stats">
-                <div class="phone-stat">
-                  <div class="val">24</div>
-                  <div class="lbl">Active Vehicles</div>
-                </div>
-                <div class="phone-stat">
-                  <div class="val">156</div>
-                  <div class="lbl">Trips Today</div>
-                </div>
+                <div class="phone-stat"><div class="val">24</div><div class="lbl" data-i18n="hero.activeVehicles">Active Vehicles</div></div>
+                <div class="phone-stat"><div class="val">156</div><div class="lbl" data-i18n="hero.tripsToday">Trips Today</div></div>
               </div>
             </div>
           </div>
@@ -970,207 +629,390 @@
     </div>
   </section>
 
-  <!-- Stats -->
+  <!-- ===== STATS ===== -->
   <div class="stats-bar reveal">
     <div class="stats-inner">
-      <div class="stat-item">
-        <div class="stat-number" data-count="5">5</div>
-        <div class="stat-label">User Roles</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Languages</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Platforms</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">Possibilities</div>
-      </div>
+      <div class="stat-item"><div class="stat-number">5</div><div class="stat-label" data-i18n="stats.roles">User Roles</div></div>
+      <div class="stat-item"><div class="stat-number">2</div><div class="stat-label" data-i18n="stats.languages">Languages</div></div>
+      <div class="stat-item"><div class="stat-number">2</div><div class="stat-label" data-i18n="stats.platforms">Platforms</div></div>
+      <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label" data-i18n="stats.tracking">Live Tracking</div></div>
     </div>
   </div>
 
-  <!-- Features -->
+  <!-- ===== FEATURES ===== -->
   <section id="features">
     <div class="reveal">
-      <div class="section-label">Features</div>
-      <h2 class="section-title">Everything You Need</h2>
-      <p class="section-desc">A complete fleet management solution designed for modern teams who demand real-time visibility and control.</p>
+      <div class="section-label" data-i18n="features.label">Features</div>
+      <h2 class="section-title" data-i18n="features.title">Everything You Need</h2>
+      <p class="section-desc" data-i18n="features.desc">A complete fleet management solution designed for modern teams who demand real-time visibility and control.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-icon blue">📍</div>
-        <h3>GPS Tracking</h3>
-        <p>Real-time vehicle location tracking with route history, geofencing alerts, and live map visualization.</p>
+        <h3 data-i18n="features.gps.title">GPS Tracking</h3>
+        <p data-i18n="features.gps.desc">Real-time vehicle location tracking with route history and live map visualization.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon green">📋</div>
-        <h3>Trip Logging</h3>
-        <p>Automated trip recording with odometer scanning, route optimization, and detailed trip analytics.</p>
+        <h3 data-i18n="features.trips.title">Trip Logging</h3>
+        <p data-i18n="features.trips.desc">Automated trip recording with odometer scanning, route optimization, and detailed analytics.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon orange">🔧</div>
-        <h3>Maintenance</h3>
-        <p>Smart maintenance scheduling with alerts, service history tracking, and cost analysis dashboards.</p>
+        <h3 data-i18n="features.maint.title">Maintenance</h3>
+        <p data-i18n="features.maint.desc">Smart maintenance scheduling with alerts, service history tracking, and cost dashboards.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon purple">💬</div>
-        <h3>Team Comms</h3>
-        <p>Built-in voice and text communication for seamless coordination between drivers, dispatchers, and managers.</p>
+        <h3 data-i18n="features.comms.title">Team Comms</h3>
+        <p data-i18n="features.comms.desc">Built-in voice and text communication for seamless team coordination.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon cyan">📊</div>
-        <h3>Reports & Analytics</h3>
-        <p>Comprehensive trip reports, cost analysis, fuel consumption tracking, and performance metrics.</p>
+        <h3 data-i18n="features.reports.title">Reports & Analytics</h3>
+        <p data-i18n="features.reports.desc">Comprehensive trip reports, cost analysis, fuel tracking, and performance metrics.</p>
       </div>
       <div class="feature-card reveal">
         <div class="feature-icon red">🌍</div>
-        <h3>Multi-Language</h3>
-        <p>Full Arabic and English support with proper RTL layout handling for a native experience in both languages.</p>
+        <h3 data-i18n="features.lang.title">Multi-Language</h3>
+        <p data-i18n="features.lang.desc">Full Arabic & English support with proper RTL layout for a native experience.</p>
       </div>
     </div>
   </section>
 
-  <!-- Roles -->
+  <!-- ===== ROLES ===== -->
   <section id="roles">
     <div class="reveal">
-      <div class="section-label">Access Control</div>
-      <h2 class="section-title">5 Powerful Roles</h2>
-      <p class="section-desc">Role-based access control ensures every team member sees exactly what they need — nothing more, nothing less.</p>
+      <div class="section-label" data-i18n="roles.label">Access Control</div>
+      <h2 class="section-title" data-i18n="roles.title">5 Powerful Roles</h2>
+      <p class="section-desc" data-i18n="roles.desc">Every team member sees exactly what they need — nothing more, nothing less.</p>
     </div>
     <div class="roles-grid">
       <div class="role-card reveal">
         <span class="role-icon">👑</span>
-        <h3>Owner</h3>
-        <p>Full platform access, team management, financial overview, and strategic controls</p>
+        <h3 data-i18n="roles.owner.title">Owner</h3>
+        <p data-i18n="roles.owner.desc">Full platform access, team management, financial overview</p>
       </div>
       <div class="role-card reveal">
         <span class="role-icon">🚗</span>
-        <h3>Driver</h3>
-        <p>Trip management, navigation, odometer reporting, and real-time communication</p>
+        <h3 data-i18n="roles.driver.title">Driver</h3>
+        <p data-i18n="roles.driver.desc">Trip management, navigation, odometer reporting</p>
       </div>
       <div class="role-card reveal">
         <span class="role-icon">📡</span>
-        <h3>Dispatcher</h3>
-        <p>Trip assignment, route planning, fleet coordination, and live monitoring</p>
+        <h3 data-i18n="roles.dispatcher.title">Dispatcher</h3>
+        <p data-i18n="roles.dispatcher.desc">Trip assignment, route planning, live monitoring</p>
       </div>
       <div class="role-card reveal">
         <span class="role-icon">🔧</span>
-        <h3>Maintenance</h3>
-        <p>Service scheduling, alert management, parts inventory, and repair logging</p>
+        <h3 data-i18n="roles.maintenance.title">Maintenance</h3>
+        <p data-i18n="roles.maintenance.desc">Service scheduling, alert management, repair logging</p>
       </div>
       <div class="role-card reveal">
         <span class="role-icon">💰</span>
-        <h3>Accountant</h3>
-        <p>Cost tracking, expense reports, budget management, and financial analytics</p>
+        <h3 data-i18n="roles.accountant.title">Accountant</h3>
+        <p data-i18n="roles.accountant.desc">Cost tracking, expense reports, budget management</p>
       </div>
     </div>
   </section>
 
-  <!-- Tech Stack -->
-  <div class="tech-section" id="tech">
-    <div class="section-inner">
-      <div class="reveal" style="text-align: center;">
-        <div class="section-label" style="justify-content: center;">Tech Stack</div>
-        <h2 class="section-title">Built With Modern Tools</h2>
-        <p class="section-desc" style="margin: 0 auto;">Leveraging the best technologies for performance, scalability, and developer experience.</p>
-      </div>
-      <div class="tech-grid reveal">
-        <div class="tech-item">
-          <span class="icon">⚛️</span>
-          <span class="name">React Native</span>
-        </div>
-        <div class="tech-item">
-          <span class="icon">📱</span>
-          <span class="name">Expo</span>
-        </div>
-        <div class="tech-item">
-          <span class="icon">⚡</span>
-          <span class="name">Supabase</span>
-        </div>
-        <div class="tech-item">
-          <span class="icon">🗄️</span>
-          <span class="name">PostgreSQL</span>
-        </div>
-        <div class="tech-item">
-          <span class="icon">🔐</span>
-          <span class="name">Row Level Security</span>
-        </div>
-      </div>
+  <!-- ===== AUTH / LOGIN & SIGNUP ===== -->
+  <section class="auth-section" id="auth">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" style="justify-content:center;" data-i18n="auth.label">Get Started</div>
+      <h2 class="section-title" data-i18n="auth.title">Join FleetOn Today</h2>
+      <p class="section-desc" style="margin:0 auto;" data-i18n="auth.desc">Create your account in seconds or log in to manage your fleet.</p>
     </div>
-  </div>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="cta-box reveal">
-      <h2>Ready to Manage Your Fleet?</h2>
-      <p>Check out the project on GitHub, star it, and follow along as we build the future of fleet management.</p>
-      <div class="cta-actions">
-        <a href="https://github.com/galalemad75-creator/fleeton-app" class="btn btn-primary" target="_blank">
-          ⭐ Star on GitHub
-        </a>
-        <a href="https://github.com/galalemad75-creator/fleeton-app/issues" class="btn btn-secondary" target="_blank">
-          🐛 Report an Issue
-        </a>
+    <div class="auth-grid">
+      <!-- Login -->
+      <div class="auth-card reveal">
+        <h3 data-i18n="auth.login.title">Welcome Back 👋</h3>
+        <p class="subtitle" data-i18n="auth.login.subtitle">Log in to your FleetOn account</p>
+        <div class="form-group">
+          <label data-i18n="auth.login.email">Email</label>
+          <input type="email" placeholder="you@example.com" data-i18n-placeholder="auth.login.emailPh">
+        </div>
+        <div class="form-group">
+          <label data-i18n="auth.login.password">Password</label>
+          <input type="password" placeholder="••••••••" data-i18n-placeholder="auth.login.passPh">
+        </div>
+        <div class="form-row">
+          <label><input type="checkbox" class="checkbox"> <span data-i18n="auth.login.remember">Remember me</span></label>
+          <a href="#" data-i18n="auth.login.forgot">Forgot password?</a>
+        </div>
+        <button class="btn btn-primary" data-i18n="auth.login.btn">Log In</button>
+        <div class="auth-divider" data-i18n="auth.login.or">or continue with</div>
+        <div class="social-login">
+          <button class="social-btn" title="Google">G</button>
+          <button class="social-btn" title="Apple">🍎</button>
+        </div>
+      </div>
+      <!-- Signup -->
+      <div class="auth-card reveal">
+        <h3 data-i18n="auth.signup.title">Create Account 🚀</h3>
+        <p class="subtitle" data-i18n="auth.signup.subtitle">Start managing your fleet in minutes</p>
+        <div class="form-group">
+          <label data-i18n="auth.signup.name">Full Name</label>
+          <input type="text" placeholder="Ahmed Mohamed" data-i18n-placeholder="auth.signup.namePh">
+        </div>
+        <div class="form-group">
+          <label data-i18n="auth.signup.email">Email</label>
+          <input type="email" placeholder="you@example.com" data-i18n-placeholder="auth.signup.emailPh">
+        </div>
+        <div class="form-group">
+          <label data-i18n="auth.signup.password">Password</label>
+          <input type="password" placeholder="Min 8 characters" data-i18n-placeholder="auth.signup.passPh">
+        </div>
+        <div class="form-row">
+          <label><input type="checkbox" class="checkbox"> <span data-i18n="auth.signup.terms">I agree to Terms & Privacy</span></label>
+        </div>
+        <button class="btn btn-primary" data-i18n="auth.signup.btn">Create Account</button>
+        <div class="auth-divider" data-i18n="auth.signup.or">or sign up with</div>
+        <div class="social-login">
+          <button class="social-btn" title="Google">G</button>
+          <button class="social-btn" title="Apple">🍎</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== DOWNLOAD ===== -->
+  <section class="download-section" id="download">
+    <div class="download-box reveal">
+      <h2 data-i18n="download.title">Download FleetOn</h2>
+      <p data-i18n="download.desc">Available on Android and iOS. Download now and take control of your fleet.</p>
+      <div class="download-actions">
+        <a href="#" class="btn btn-download" data-i18n="download.google">🤖 Google Play</a>
+        <a href="#" class="btn btn-apple" data-i18n="download.apple">🍎 App Store</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="footer-inner">
       <div>
         <div class="footer-brand"><span>🚗</span> FleetOn</div>
-        <p class="footer-desc">Smart fleet management platform with real-time GPS tracking, trip logging, maintenance scheduling, and team communication.</p>
+        <p class="footer-desc" data-i18n="footer.desc">Smart fleet management platform with real-time GPS tracking, trip logging, maintenance scheduling, and team communication.</p>
       </div>
       <div>
-        <h4>Product</h4>
+        <h4 data-i18n="footer.product">Product</h4>
         <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#roles">Roles</a></li>
-          <li><a href="#tech">Tech Stack</a></li>
+          <li><a href="#features" data-i18n="footer.features">Features</a></li>
+          <li><a href="#roles" data-i18n="footer.roles">Roles</a></li>
+          <li><a href="#download" data-i18n="footer.download">Download</a></li>
         </ul>
       </div>
       <div>
-        <h4>Legal</h4>
+        <h4 data-i18n="footer.legal">Legal</h4>
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="#" data-i18n="footer.privacy">Privacy Policy</a></li>
+          <li><a href="#" data-i18n="footer.terms">Terms of Service</a></li>
+          <li><a href="#" data-i18n="footer.about">About Us</a></li>
         </ul>
       </div>
       <div>
-        <h4>Developers</h4>
+        <h4 data-i18n="footer.support">Support</h4>
         <ul>
-          <li><a href="https://github.com/galalemad75-creator/fleeton-app" target="_blank">GitHub</a></li>
-          <li><a href="https://github.com/galalemad75-creator/fleeton-app/issues" target="_blank">Issues</a></li>
-          <li><a href="#">Documentation</a></li>
+          <li><a href="#" data-i18n="footer.help">Help Center</a></li>
+          <li><a href="#" data-i18n="footer.contact">Contact Us</a></li>
+          <li><a href="#" data-i18n="footer.faq">FAQ</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 FleetOn. All rights reserved.</span>
-      <div class="footer-socials">
-        <a href="https://github.com/galalemad75-creator/fleeton-app" target="_blank" aria-label="GitHub">📂</a>
-      </div>
+      <span>© 2026 FleetOn. <span data-i18n="footer.rights">All rights reserved.</span></span>
     </div>
   </footer>
 
   <script>
-    // Loading screen
+    // ===== i18n Translations =====
+    const translations = {
+      en: {
+        "nav.features": "Features", "nav.roles": "Roles", "nav.download": "Download",
+        "nav.login": "Log In", "nav.signup": "Sign Up",
+        "hero.badge": "Now Available — Download Free",
+        "hero.title": 'Manage Your Fleet<br><span class="gradient">Smarter, Not Harder</span>',
+        "hero.desc": "Track vehicles in real-time, log trips automatically, schedule maintenance, and keep your entire team connected — all from one powerful app.",
+        "hero.download": "📥 Download Free", "hero.explore": "Explore Features ↓",
+        "hero.trust": "Trusted by fleet managers worldwide",
+        "hero.phoneHeader": "FleetOn Dashboard",
+        "hero.activeVehicles": "Active Vehicles", "hero.tripsToday": "Trips Today",
+        "stats.roles": "User Roles", "stats.languages": "Languages",
+        "stats.platforms": "Platforms", "stats.tracking": "Live Tracking",
+        "features.label": "Features", "features.title": "Everything You Need",
+        "features.desc": "A complete fleet management solution designed for modern teams who demand real-time visibility and control.",
+        "features.gps.title": "GPS Tracking", "features.gps.desc": "Real-time vehicle location tracking with route history and live map visualization.",
+        "features.trips.title": "Trip Logging", "features.trips.desc": "Automated trip recording with odometer scanning, route optimization, and detailed analytics.",
+        "features.maint.title": "Maintenance", "features.maint.desc": "Smart maintenance scheduling with alerts, service history tracking, and cost dashboards.",
+        "features.comms.title": "Team Comms", "features.comms.desc": "Built-in voice and text communication for seamless team coordination.",
+        "features.reports.title": "Reports & Analytics", "features.reports.desc": "Comprehensive trip reports, cost analysis, fuel tracking, and performance metrics.",
+        "features.lang.title": "Multi-Language", "features.lang.desc": "Full Arabic & English support with proper RTL layout for a native experience.",
+        "roles.label": "Access Control", "roles.title": "5 Powerful Roles",
+        "roles.desc": "Every team member sees exactly what they need — nothing more, nothing less.",
+        "roles.owner.title": "Owner", "roles.owner.desc": "Full platform access, team management, financial overview",
+        "roles.driver.title": "Driver", "roles.driver.desc": "Trip management, navigation, odometer reporting",
+        "roles.dispatcher.title": "Dispatcher", "roles.dispatcher.desc": "Trip assignment, route planning, live monitoring",
+        "roles.maintenance.title": "Maintenance", "roles.maintenance.desc": "Service scheduling, alert management, repair logging",
+        "roles.accountant.title": "Accountant", "roles.accountant.desc": "Cost tracking, expense reports, budget management",
+        "auth.label": "Get Started", "auth.title": "Join FleetOn Today",
+        "auth.desc": "Create your account in seconds or log in to manage your fleet.",
+        "auth.login.title": "Welcome Back 👋", "auth.login.subtitle": "Log in to your FleetOn account",
+        "auth.login.email": "Email", "auth.login.emailPh": "you@example.com",
+        "auth.login.password": "Password", "auth.login.passPh": "••••••••",
+        "auth.login.remember": "Remember me", "auth.login.forgot": "Forgot password?",
+        "auth.login.btn": "Log In", "auth.login.or": "or continue with",
+        "auth.signup.title": "Create Account 🚀", "auth.signup.subtitle": "Start managing your fleet in minutes",
+        "auth.signup.name": "Full Name", "auth.signup.namePh": "Ahmed Mohamed",
+        "auth.signup.email": "Email", "auth.signup.emailPh": "you@example.com",
+        "auth.signup.password": "Password", "auth.signup.passPh": "Min 8 characters",
+        "auth.signup.terms": "I agree to Terms & Privacy", "auth.signup.btn": "Create Account",
+        "auth.signup.or": "or sign up with",
+        "download.title": "Download FleetOn",
+        "download.desc": "Available on Android and iOS. Download now and take control of your fleet.",
+        "download.google": "🤖 Google Play", "download.apple": "🍎 App Store",
+        "footer.desc": "Smart fleet management platform with real-time GPS tracking, trip logging, maintenance scheduling, and team communication.",
+        "footer.product": "Product", "footer.features": "Features", "footer.roles": "Roles",
+        "footer.download": "Download", "footer.legal": "Legal", "footer.privacy": "Privacy Policy",
+        "footer.terms": "Terms of Service", "footer.about": "About Us",
+        "footer.support": "Support", "footer.help": "Help Center", "footer.contact": "Contact Us",
+        "footer.faq": "FAQ", "footer.rights": "All rights reserved."
+      },
+      ar: {
+        "nav.features": "المميزات", "nav.roles": "الأدوار", "nav.download": "تحميل",
+        "nav.login": "تسجيل الدخول", "nav.signup": "إنشاء حساب",
+        "hero.badge": "متوفر الآن — حمل مجاناً",
+        "hero.title": 'أدِر أسطولك<br><span class="gradient">بذكاء وبسهولة</span>',
+        "hero.desc": "تتبع المركبات في الوقت الفعلي، سجّل الرحلات تلقائياً، خطّط للصيانة، وابقَ فريقك متصلاً — كل ذلك من تطبيق واحد قوي.",
+        "hero.download": "📥 حمّل مجاناً", "hero.explore": "استكشف المميزات ↓",
+        "hero.trust": "يثق به مديرو الأسطول حول العالم",
+        "hero.phoneHeader": "لوحة FleetOn",
+        "hero.activeVehicles": "مركبة نشطة", "hero.tripsToday": "رحلة اليوم",
+        "stats.roles": "أدوار المستخدمين", "stats.languages": "لغة",
+        "stats.platforms": "منصة", "stats.tracking": "تتبع مباشر",
+        "features.label": "المميزات", "features.title": "كل ما تحتاجه",
+        "features.desc": "حل متكامل لإدارة الأسطول مصمم للفرق الحديثة التي تتطلب رؤية تحكم في الوقت الفعلي.",
+        "features.gps.title": "تتبع GPS", "features.gps.desc": "تتبع موقع المركبات في الوقت الفعلي مع سجل المسارات وعرض الخريطة المباشر.",
+        "features.trips.title": "تسجيل الرحلات", "features.trips.desc": "تسجيل تلقائي للرحلات مع مسح عداد المسافات وتحسين المسارات وتحليلات مفصلة.",
+        "features.maint.title": "الصيانة", "features.maint.desc": "جدولة ذكية للصيانة مع تنبيهات وتتبع سجل الخدمة ولوحات تكلفة.",
+        "features.comms.title": "تواصل الفريق", "features.comms.desc": "تواصل صوتي ونصي مدمج لتنسيق سلس بين أعضاء الفريق.",
+        "features.reports.title": "التقارير والتحليلات", "features.reports.desc": "تقارير رحلات شاملة، تحليل تكاليف، تتبع استهلاك الوقود، ومقاييس الأداء.",
+        "features.lang.title": "متعدد اللغات", "features.lang.desc": "دعم كامل للعربية والإنجليزية مع تخطيط RTL صحيح.",
+        "roles.label": "التحكم في الوصول", "roles.title": "5 أدوار قوية",
+        "roles.desc": "كل عضو في الفريق يرى بالضبط ما يحتاجه — لا أكثر ولا أقل.",
+        "roles.owner.title": "المالك", "roles.owner.desc": "وصول كامل للمنصة، إدارة الفريق، نظرة مالية",
+        "roles.driver.title": "السائق", "roles.driver.desc": "إدارة الرحلات، الملاحة، تقارير العداد",
+        "roles.dispatcher.title": "الموزع", "roles.dispatcher.desc": "تعيين الرحلات، تخطيط المسارات، المراقبة المباشرة",
+        "roles.maintenance.title": "الصيانة", "roles.maintenance.desc": "جدولة الخدمة، إدارة التنبيهات، تسجيل الإصلاحات",
+        "roles.accountant.title": "المحاسب", "roles.accountant.desc": "تتبع التكاليف، تقارير المصروفات، إدارة الميزانية",
+        "auth.label": "ابدأ الآن", "auth.title": "انضم إلى FleetOn اليوم",
+        "auth.desc": "أنشئ حسابك في ثوانٍ أو سجّل الدخول لإدارة أسطولك.",
+        "auth.login.title": "مرحباً بعودتك 👋", "auth.login.subtitle": "سجّل الدخول إلى حساب FleetOn",
+        "auth.login.email": "البريد الإلكتروني", "auth.login.emailPh": "you@example.com",
+        "auth.login.password": "كلمة المرور", "auth.login.passPh": "••••••••",
+        "auth.login.remember": "تذكرني", "auth.login.forgot": "نسيت كلمة المرور؟",
+        "auth.login.btn": "تسجيل الدخول", "auth.login.or": "أو تابع مع",
+        "auth.signup.title": "إنشاء حساب 🚀", "auth.signup.subtitle": "ابدأ إدارة أسطولك في دقائق",
+        "auth.signup.name": "الاسم الكامل", "auth.signup.namePh": "أحمد محمد",
+        "auth.signup.email": "البريد الإلكتروني", "auth.signup.emailPh": "you@example.com",
+        "auth.signup.password": "كلمة المرور", "auth.signup.passPh": "8 أحرف على الأقل",
+        "auth.signup.terms": "أوافق على الشروط والخصوصية", "auth.signup.btn": "إنشاء حساب",
+        "auth.signup.or": "أو أنشئ حسابك مع",
+        "download.title": "حمّل FleetOn",
+        "download.desc": "متوفر على أندرويد و iOS. حمّل الآن وتولّى التحكم في أسطولك.",
+        "download.google": "🤖 Google Play", "download.apple": "🍎 App Store",
+        "footer.desc": "منصة ذكية لإدارة الأسطول مع تتبع GPS في الوقت الفعلي وتسجيل الرحلات وجدولة الصيانة والتواصل مع الفريق.",
+        "footer.product": "المنتج", "footer.features": "المميزات", "footer.roles": "الأدوار",
+        "footer.download": "تحميل", "footer.legal": "قانوني", "footer.privacy": "سياسة الخصوصية",
+        "footer.terms": "شروط الخدمة", "footer.about": "من نحن",
+        "footer.support": "الدعم", "footer.help": "مركز المساعدة", "footer.contact": "اتصل بنا",
+        "footer.faq": "الأسئلة الشائعة", "footer.rights": "جميع الحقوق محفوظة."
+      }
+    };
+
+    let currentLang = localStorage.getItem('fleeton-lang') || 'en';
+    let currentTheme = localStorage.getItem('fleeton-theme') || 'dark';
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('fleeton-lang', lang);
+      document.documentElement.lang = lang;
+      document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          if (translations[lang][key].includes('<')) {
+            el.innerHTML = translations[lang][key];
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) el.placeholder = translations[lang][key];
+      });
+
+      document.getElementById('langToggle').textContent = lang === 'ar' ? '🇺🇸' : '🌐';
+    }
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('fleeton-theme', theme);
+
+      if (theme === 'light') {
+        document.documentElement.style.setProperty('--bg-primary', '#f8fafc');
+        document.documentElement.style.setProperty('--bg-secondary', '#f1f5f9');
+        document.documentElement.style.setProperty('--bg-card', '#ffffff');
+        document.documentElement.style.setProperty('--bg-card-hover', '#f8fafc');
+        document.documentElement.style.setProperty('--bg-input', '#f1f5f9');
+        document.documentElement.style.setProperty('--text-primary', '#0f172a');
+        document.documentElement.style.setProperty('--text-secondary', '#475569');
+        document.documentElement.style.setProperty('--text-muted', '#94a3b8');
+        document.documentElement.style.setProperty('--border', '#e2e8f0');
+        document.documentElement.style.setProperty('--shadow', '0 20px 40px rgba(0,0,0,0.08)');
+        document.getElementById('themeToggle').textContent = '☀️';
+      } else {
+        document.documentElement.style.setProperty('--bg-primary', '#0a0e1a');
+        document.documentElement.style.setProperty('--bg-secondary', '#111827');
+        document.documentElement.style.setProperty('--bg-card', '#1a2035');
+        document.documentElement.style.setProperty('--bg-card-hover', '#1f2847');
+        document.documentElement.style.setProperty('--bg-input', '#151d30');
+        document.documentElement.style.setProperty('--text-primary', '#f1f5f9');
+        document.documentElement.style.setProperty('--text-secondary', '#94a3b8');
+        document.documentElement.style.setProperty('--text-muted', '#64748b');
+        document.documentElement.style.setProperty('--border', '#1e293b');
+        document.documentElement.style.setProperty('--shadow', '0 20px 40px rgba(0,0,0,0.3)');
+        document.getElementById('themeToggle').textContent = '🌙';
+      }
+    }
+
+    // Init
+    applyLanguage(currentLang);
+    applyTheme(currentTheme);
+
+    // Toggle handlers
+    document.getElementById('langToggle').addEventListener('click', () => {
+      applyLanguage(currentLang === 'en' ? 'ar' : 'en');
+    });
+
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Loader
     window.addEventListener('load', () => {
       setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
     });
 
-    // Scroll-based nav
-    const nav = document.getElementById('nav');
+    // Scroll nav
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu toggle
+    // Mobile menu
     document.getElementById('mobileToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
     });
@@ -1184,7 +1026,6 @@
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // Particles
