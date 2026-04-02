@@ -12,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#0f172a"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.fleeton.app",
@@ -24,7 +26,10 @@
         "NSCameraUsageDescription": "FleetOn needs camera access to capture odometer readings.",
         "NSPhotoLibraryUsageDescription": "FleetOn needs photo access to save odometer photos.",
         "NSLocationAlwaysUsageDescription": "FleetOn needs background location to track trips continuously.",
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
     "android": {
@@ -53,11 +58,30 @@
       }
     },
     "plugins": [
-      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "Allow FleetOn to use your location to track trips." }],
-      ["expo-camera", { "cameraPermission": "FleetOn needs camera access to capture odometer readings.", "microphonePermission": "FleetOn needs microphone for voice messages.", "recordAudioAndroid": true }],
-      ["expo-av"],
-      ["expo-notifications"],
-      ["expo-localization"]
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow FleetOn to use your location to track trips."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "FleetOn needs camera access to capture odometer readings.",
+          "microphonePermission": "FleetOn needs microphone for voice messages.",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-av"
+      ],
+      [
+        "expo-notifications"
+      ],
+      [
+        "expo-localization"
+      ],
+      "expo-asset"
     ],
     "extra": {
       "eas": {
