@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "FleetOn",
+    "slug": "fleeton",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fleeton.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "FleetOn needs location access to track trips in real-time, even when the app is in the background.",
+        "NSLocationWhenInUseUsageDescription": "FleetOn needs location access to track your current trip.",
+        "NSMicrophoneUsageDescription": "FleetOn needs microphone access to record voice messages for dispatchers.",
+        "NSCameraUsageDescription": "FleetOn needs camera access to capture odometer readings.",
+        "NSPhotoLibraryUsageDescription": "FleetOn needs photo access to save odometer photos.",
+        "NSLocationAlwaysUsageDescription": "FleetOn needs background location to track trips continuously.",
+        "UIBackgroundModes": ["location", "fetch"]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "package": "com.fleeton.app",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "RECORD_AUDIO",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "VIBRATE",
+        "RECEIVE_BOOT_COMPLETED",
+        "POST_NOTIFICATIONS"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        }
+      }
+    },
+    "plugins": [
+      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "Allow FleetOn to use your location to track trips." }],
+      ["expo-camera", { "cameraPermission": "FleetOn needs camera access to capture odometer readings.", "microphonePermission": "FleetOn needs microphone for voice messages.", "recordAudioAndroid": true }],
+      ["expo-av"],
+      ["expo-notifications"],
+      ["expo-localization"]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      }
+    }
+  }
+}
