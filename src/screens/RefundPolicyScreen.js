@@ -1,11 +1,11 @@
-// FleetOn — Privacy Policy Screen (enhanced with AdSense + Cookies + Third-party + Children)
+// FleetOn — Refund & Replacement Policy Screen
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme, FONTS, SPACING, RADIUS } from '../contexts/ThemeContext';
 import { i18n } from '../lib/i18n';
 
-export default function PrivacyPolicyScreen({ navigation }) {
+export default function RefundPolicyScreen({ navigation }) {
   const { COLORS } = useTheme();
   const s = styles(COLORS);
 
@@ -25,34 +25,30 @@ export default function PrivacyPolicyScreen({ navigation }) {
         </TouchableOpacity>
 
         <View style={s.hero}>
-          <Text style={s.heroEmoji}>🔒</Text>
-          <Text style={s.heroTitle}>{i18n.t('privacyPolicy')}</Text>
+          <Text style={s.heroEmoji}>💰</Text>
+          <Text style={s.heroTitle}>{i18n.t('refundTitle')}</Text>
           <Text style={s.heroDate}>
             {i18n.t('lastUpdated')}: April 2025
           </Text>
         </View>
 
-        <Section title={i18n.t('privacyIntro').split('.')[0]} text={i18n.t('privacyIntro')} />
-        <Section title={i18n.t('privacyInfoCollected')} text={i18n.t('privacyInfoCollectedText')} />
-        <Section title={i18n.t('privacyHowWeUse')} text={i18n.t('privacyHowWeUseText')} />
-        <Section title={i18n.t('privacyDataSecurity')} text={i18n.t('privacyDataSecurityText')} />
-        <Section title={i18n.t('privacyCookies')} text={i18n.t('privacyCookiesText')} />
-        <Section title={i18n.t('privacyAds')} text={i18n.t('privacyAdsText')} />
-        <Section title={i18n.t('privacyThirdParty')} text={i18n.t('privacyThirdPartyText')} />
-        <Section title={i18n.t('privacyThirdPartyDetailed')} text={i18n.t('privacyThirdPartyDetailedText')} />
-        <Section title={i18n.t('privacyDataRetention')} text={i18n.t('privacyDataRetentionText')} />
-        <Section title={i18n.t('privacyYourRights')} text={i18n.t('privacyYourRightsText')} />
-        <Section title={i18n.t('privacyChildren')} text={i18n.t('privacyChildrenText')} />
-        <Section title={i18n.t('privacyChanges')} text={i18n.t('privacyChangesText')} />
-        <Section title={i18n.t('privacyContact')} text={i18n.t('privacyContactText')} />
+        <Section title={i18n.t('refundIntro').split('.')[0]} text={i18n.t('refundIntro')} />
+        <Section title={i18n.t('refundEligibility')} text={i18n.t('refundEligibilityText')} />
+        <Section title={i18n.t('refundProcess')} text={i18n.t('refundProcessText')} />
+        <Section title={i18n.t('refundTimeline')} text={i18n.t('refundTimelineText')} />
+        <Section title={i18n.t('refundPartial')} text={i18n.t('refundPartialText')} />
+        <Section title={i18n.t('refundReplacement')} text={i18n.t('refundReplacementText')} />
+        <Section title={i18n.t('refundCancellation')} text={i18n.t('refundCancellationText')} />
+        <Section title={i18n.t('refundExceptions')} text={i18n.t('refundExceptionsText')} />
+        <Section title={i18n.t('refundContact')} text={i18n.t('refundContactText')} />
 
         {/* Cross-links */}
         <View style={s.crossLinks}>
+          <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+            <Text style={s.linkText}>🔒 {i18n.t('viewPrivacyPolicy')}</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('TermsOfService')}>
             <Text style={s.linkText}>📄 {i18n.t('viewTerms')}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('RefundPolicy')}>
-            <Text style={s.linkText}>💰 {i18n.t('viewRefund')}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
             <Text style={s.linkText}>📬 {i18n.t('viewContact')}</Text>

@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FleetOn — Fleet Management</title>
+  <meta name="description" content="FleetOn is a comprehensive fleet management platform for vehicle tracking, trip management, maintenance scheduling, team communication, and cost analysis. Available in English and Arabic.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="fleet management, vehicle tracking, GPS tracking, trip management, maintenance scheduling, fleet app">
+  <meta property="og:title" content="FleetOn — Fleet Management Platform">
+  <meta property="og:description" content="Track vehicles, manage trips, schedule maintenance, and communicate with your team — all in one platform.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FleetOn — Fleet Management Platform">
+  <meta name="twitter:description" content="Track vehicles, manage trips, schedule maintenance, and communicate with your team — all in one platform.">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -422,6 +432,118 @@
   </div>
 </div>
 
+<!-- ==================== PRIVACY POLICY PAGE ==================== -->
+<div class="page hidden" id="privacyPage">
+  <div class="dashboard" style="max-width:800px;margin:0 auto">
+    <a href="#" onclick="goBack()" style="color:var(--primary);font-size:14px;margin-bottom:16px;display:inline-block" data-i18n="back">← Back</a>
+    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="font-size:48px">🔒</div>
+      <h1 data-i18n="privacyPolicy" style="margin-top:8px">Privacy Policy</h1>
+      <p style="color:var(--text3);font-size:13px;margin-top:8px"><span data-i18n="lastUpdated">Last Updated</span>: April 2025</p>
+    </div>
+    <div class="legal-section" id="privacyContent"></div>
+    <div class="page-links" id="privacyLinks"></div>
+    <div class="page-footer" id="privacyFooter"></div>
+  </div>
+</div>
+
+<!-- ==================== TERMS OF SERVICE PAGE ==================== -->
+<div class="page hidden" id="termsPage">
+  <div class="dashboard" style="max-width:800px;margin:0 auto">
+    <a href="#" onclick="goBack()" style="color:var(--primary);font-size:14px;margin-bottom:16px;display:inline-block" data-i18n="back">← Back</a>
+    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="font-size:48px">📄</div>
+      <h1 data-i18n="terms" style="margin-top:8px">Terms of Service</h1>
+      <p style="color:var(--text3);font-size:13px;margin-top:8px"><span data-i18n="effectiveDate">Effective Date</span>: April 2025</p>
+    </div>
+    <div class="legal-section" id="termsContent"></div>
+    <div class="page-links" id="termsLinks"></div>
+    <div class="page-footer" id="termsFooter"></div>
+  </div>
+</div>
+
+<!-- ==================== REFUND POLICY PAGE ==================== -->
+<div class="page hidden" id="refundPage">
+  <div class="dashboard" style="max-width:800px;margin:0 auto">
+    <a href="#" onclick="goBack()" style="color:var(--primary);font-size:14px;margin-bottom:16px;display:inline-block" data-i18n="back">← Back</a>
+    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="font-size:48px">💰</div>
+      <h1 data-i18n="refundTitle" style="margin-top:8px">Refund & Replacement Policy</h1>
+      <p style="color:var(--text3);font-size:13px;margin-top:8px"><span data-i18n="lastUpdated">Last Updated</span>: April 2025</p>
+    </div>
+    <div class="legal-section" id="refundContent"></div>
+    <div class="page-links" id="refundLinks"></div>
+    <div class="page-footer" id="refundFooter"></div>
+  </div>
+</div>
+
+<!-- ==================== ABOUT US PAGE ==================== -->
+<div class="page hidden" id="aboutPage">
+  <div class="dashboard" style="max-width:800px;margin:0 auto">
+    <a href="#" onclick="goBack()" style="color:var(--primary);font-size:14px;margin-bottom:16px;display:inline-block" data-i18n="back">← Back</a>
+    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="font-size:64px">🚗</div>
+      <h1 style="font-size:36px;letter-spacing:3px;margin-top:8px">FleetOn</h1>
+      <p style="color:var(--text2)" data-i18n="tagline">Fleet Management Platform</p>
+      <span style="background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.4);border-radius:20px;padding:4px 16px;font-size:13px;color:var(--primary);display:inline-block;margin-top:12px">v1.0.0</span>
+    </div>
+    <div class="legal-section" id="aboutContent"></div>
+    <div class="page-links" id="aboutLinks"></div>
+    <div class="page-footer" id="aboutFooter"></div>
+  </div>
+</div>
+
+<!-- ==================== CONTACT US PAGE ==================== -->
+<div class="page hidden" id="contactPage">
+  <div class="dashboard" style="max-width:800px;margin:0 auto">
+    <a href="#" onclick="goBack()" style="color:var(--primary);font-size:14px;margin-bottom:16px;display:inline-block" data-i18n="back">← Back</a>
+    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div style="font-size:48px">📬</div>
+      <h1 data-i18n="contactTitle" style="margin-top:8px">Contact Us</h1>
+      <p style="color:var(--text2);font-size:14px;margin-top:8px" data-i18n="contactSubtitle">We'd love to hear from you!</p>
+    </div>
+    <div class="card" style="margin-bottom:20px">
+      <h3 style="margin-bottom:12px">📋 <span data-i18n="contactInfo">Contact Information</span></h3>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)">
+        <span style="font-size:20px">📧</span>
+        <div><div style="font-size:12px;color:var(--text3)" data-i18n="contactDirectEmail">Direct Email</div><div style="color:var(--primary);font-weight:600">emadh5156@gmail.com</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 0">
+        <span style="font-size:20px">⏰</span>
+        <div style="font-size:13px;color:var(--text2)" data-i18n="contactResponse">We typically respond within 24-48 hours.</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:16px">✉️ <span data-i18n="contactTitle">Contact Us</span></h3>
+      <div class="form-group"><label data-i18n="contactName">Your Name</label><input type="text" id="contactName" placeholder="Your Name"></div>
+      <div class="form-group"><label data-i18n="contactEmail">Your Email</label><input type="email" id="contactEmail" placeholder="you@example.com"></div>
+      <div class="form-group"><label data-i18n="contactSubject">Subject</label><input type="text" id="contactSubject" placeholder="Subject"></div>
+      <div class="form-group"><label data-i18n="contactMessage">Your Message</label><textarea id="contactMessage" rows="5" style="width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);padding:12px;font-size:15px;resize:vertical;outline:none" placeholder="Your message..."></textarea></div>
+      <button class="btn btn-primary" onclick="handleContactSend()" data-i18n="contactSend">Send Message</button>
+    </div>
+    <div class="page-links" id="contactLinks"></div>
+    <div class="page-footer" id="contactFooter"></div>
+  </div>
+</div>
+
+<style>
+  .legal-section .sec { margin-bottom: 24px; }
+  .legal-section .sec-title { color: var(--primary); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .legal-section .sec-text { color: var(--text2); font-size: 15px; line-height: 24; white-space: pre-line; }
+  .legal-section .num-item { display: flex; gap: 8px; margin-bottom: 6px; }
+  .legal-section .num-item .n { color: var(--primary); font-weight: 700; min-width: 24px; }
+  .legal-section .num-item .t { color: var(--text2); font-size: 15px; flex: 1; line-height: 22; }
+  .legal-section .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 10px; margin-bottom: 20px; }
+  .legal-section .stat-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+  .legal-section .stat-card .emoji { font-size: 28px; }
+  .legal-section .stat-card .num { font-size: 24px; font-weight: 800; color: var(--primary); }
+  .legal-section .stat-card .lbl { font-size: 11px; color: var(--text3); margin-top: 4px; }
+  .page-links { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .page-links a { color: var(--primary); font-size: 15px; display: block; margin-bottom: 12px; text-decoration: none; font-weight: 500; }
+  .page-footer { text-align: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text3); font-size: 13px; }
+  .page-footer .made { margin-top: 4px; }
+</style>
+
 <script type="module">
   // ==================== SUPABASE ====================
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
@@ -453,6 +575,152 @@
       error: 'Error', success: 'Success', driverCode: 'Driver Code', dispatcherCode: 'Dispatcher Code',
       invalidCode: 'Invalid group code', codeExpired: 'Code limit reached',
       tripStarted: 'Trip started!', tripEnded: 'Trip ended!', carAdded: 'Car added!', partAdded: 'Part added!',
+      // Legal
+      privacyPolicy: 'Privacy Policy', terms: 'Terms of Service', aboutUs: 'About Us', contact: 'Contact Us',
+      refundPolicy: 'Refund & Replacement Policy', lastUpdated: 'Last Updated', effectiveDate: 'Effective Date',
+      // Contact
+      contactTitle: 'Contact Us', contactSubtitle: "We'd love to hear from you! Send us a message and we'll respond as soon as possible.",
+      contactName: 'Your Name', contactEmail: 'Your Email', contactSubject: 'Subject', contactMessage: 'Your Message',
+      contactSend: 'Send Message', contactSuccess: 'Message sent successfully!', contactError: 'Failed to send message.',
+      contactRequired: 'All fields are required', contactInfo: 'Contact Information', contactDirectEmail: 'Direct Email',
+      contactResponse: 'We typically respond within 24-48 hours.',
+      // Cross-links
+      viewPrivacyPolicy: 'View our Privacy Policy', viewTerms: 'View Terms of Service', viewAboutUs: 'Learn more About Us',
+      viewRefund: 'View Refund & Replacement Policy', viewContact: 'Contact Us',
+      // Footer
+      aboutCopyright: '© 2024 FleetOn. All rights reserved.', aboutMadeWith: 'Made with ❤️ for fleet managers everywhere',
+      // About
+      aboutMission: 'Our Mission', aboutVision: 'Our Vision', aboutStats: 'By The Numbers',
+      aboutStatVehicles: 'Vehicles Managed', aboutStatTrips: 'Trips Completed', aboutStatUsers: 'Active Users', aboutStatUptime: 'Uptime',
+      aboutFeatures: 'Key Features', aboutTeam: 'Our Team', aboutContact: 'Get in Touch', aboutVersion: 'Version',
+      // Refund
+      refundTitle: 'Refund & Replacement Policy',
+      // Privacy
+      privacyIntro: 'FleetOn is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our fleet management application.',
+      privacyInfoCollected: 'Information We Collect',
+      privacyInfoCollectedText: 'We collect information you provide directly (name, email, company details), location data for trip tracking, vehicle and maintenance records, and communication data between team members. We also collect device information, IP address, and usage analytics.',
+      privacyHowWeUse: 'How We Use Your Information',
+      privacyHowWeUseText: 'We use your data to provide fleet management services, track trips, manage maintenance schedules, facilitate team communication, improve our application, and send service-related notifications.',
+      privacyDataSecurity: 'Data Security',
+      privacyDataSecurityText: 'We implement industry-standard security measures including AES-256 encryption, secure authentication (Supabase Auth), Row Level Security (RLS), and regular security audits.',
+      privacyCookies: 'Cookies & Tracking Technologies',
+      privacyCookiesText: 'We use cookies and similar tracking technologies: Essential Cookies (authentication, session), Analytics Cookies (Google Analytics), Advertising Cookies (Google AdSense), and Preference Cookies (language, theme). You can control cookies through your browser settings.',
+      privacyAds: 'Advertising & Google AdSense',
+      privacyAdsText: 'FleetOn may display advertisements provided by Google AdSense. Google AdSense uses cookies to serve ads based on your prior visits. You can opt out of personalized advertising by visiting Google Ads Settings. Third-party vendors use cookies to serve ads based on visits to our app and/or other sites.',
+      privacyThirdParty: 'Third-Party Services',
+      privacyThirdPartyText: 'We use Supabase (backend), Google Maps (mapping), Expo & React Native (app framework), Google AdSense (advertising), Google Analytics (analytics), and Firebase Cloud Messaging (push notifications).',
+      privacyThirdPartyDetailed: 'Third-Party Services Details',
+      privacyThirdPartyDetailedText: 'Supabase: Backend services. Privacy: supabase.com/privacy\nGoogle Maps: Location services. Privacy: policies.google.com/privacy\nGoogle AdSense: Advertising. Privacy: policies.google.com/privacy\nGoogle Analytics: Analytics. Privacy: policies.google.com/privacy\nExpo: App infrastructure. Privacy: expo.dev/privacy',
+      privacyDataRetention: 'Data Retention',
+      privacyDataRetentionText: 'We retain your data as long as your account is active. After deletion, we retain certain data for up to 30 days for legal purposes.',
+      privacyYourRights: 'Your Rights',
+      privacyYourRightsText: 'You have the right to access, correct, or delete your personal data. You can export trip reports and manage account settings at any time.',
+      privacyChildren: "Children's Privacy",
+      privacyChildrenText: 'FleetOn is not intended for users under 16 years of age. We do not knowingly collect data from children under 16.',
+      privacyChanges: 'Changes to This Policy',
+      privacyChangesText: 'We may update this Privacy Policy from time to time. Continued use constitutes acceptance.',
+      privacyContact: 'Contact Us',
+      privacyContactText: 'Questions? Contact us at: emadh5156@gmail.com',
+      // Terms
+      termsAcceptance: 'Acceptance of Terms',
+      termsAcceptanceText: 'By using FleetOn, you agree to these Terms of Service. These terms apply to all users.',
+      termsDescription: 'Service Description',
+      termsDescriptionText: 'FleetOn is a fleet management platform for vehicle tracking, trip management, maintenance scheduling, and team communication.',
+      termsAccount: 'User Accounts',
+      termsAccountText: 'You are responsible for maintaining the confidentiality of your account credentials.',
+      termsUsage: 'Acceptable Use',
+      termsUsageText: 'Use FleetOn only for lawful business purposes. Do not misuse the service or attempt unauthorized access.',
+      termsSubscription: 'Subscription & Payments',
+      termsSubscriptionText: 'FleetOn offers Free Trial, Starter, Business, and Enterprise plans billed monthly per vehicle.',
+      termsLocation: 'Location Data',
+      termsLocationText: 'FleetOn uses GPS for trip tracking. Background location maintains tracking when minimized.',
+      termsIP: 'Intellectual Property',
+      termsIPText: 'All rights in FleetOn belong to FleetOn. Do not copy, modify, or reverse-engineer.',
+      termsTermination: 'Termination',
+      termsTerminationText: 'We may suspend or terminate accounts for violations. You can delete your account anytime.',
+      termsDisclaimer: 'Disclaimer of Warranties',
+      termsDisclaimerText: 'FleetOn is provided "as is" without warranties.',
+      termsLiability: 'Limitation of Liability',
+      termsLiabilityText: 'FleetOn shall not be liable for indirect or consequential damages.',
+      termsGoverning: 'Governing Law',
+      termsGoverningText: 'These terms are governed by the laws of the jurisdiction in which FleetOn operates.',
+      termsGooglePlay: 'Google Play Store Compliance',
+      termsAppStore: 'Apple App Store Compliance',
+      termsAdSense: 'Google AdSense Compliance',
+      termsGP1: 'The app complies with Google Play Developer Program Policies.',
+      termsGP2: 'We do not collect or share personal data beyond what is necessary.',
+      termsGP3: 'The app does not contain malware or malicious code.',
+      termsGP4: 'Location data is collected only with explicit user consent.',
+      termsGP5: 'The app provides a mechanism to request account and data deletion.',
+      termsGP6: 'We do not sell personal data to third parties.',
+      termsGP7: 'All advertisements comply with Google Play ad policies.',
+      termsGP8: 'Push notifications are used only for service-related alerts.',
+      termsGP9: 'The app supports appropriate content ratings.',
+      termsGP10: 'We handle user data in accordance with the Families Policy.',
+      termsGP11: 'The app is free from deceptive behavior.',
+      termsGP12: 'In-app purchases follow Google Play billing requirements.',
+      termsGP13: 'The app requests only necessary permissions.',
+      termsGP14: 'We provide an accessible privacy policy link.',
+      termsGP15: 'The app respects user opt-out preferences.',
+      termsAS1: 'The app complies with Apple App Store Review Guidelines.',
+      termsAS2: 'In-app purchases use Apple In-App Purchase system.',
+      termsAS3: 'The app does not access data beyond its functionality.',
+      termsAS4: 'We provide a clear privacy policy as required.',
+      termsAS5: 'The app does not include hidden features.',
+      termsAS6: 'We respect user privacy and follow Apple requirements.',
+      termsAS7: 'The app is suitable for its age rating.',
+      termsAS8: 'Background location usage is clearly disclosed.',
+      termsAS9: 'The app does not use private APIs.',
+      termsAS10: 'We provide a mechanism to manage or delete accounts.',
+      termsAS11: 'All content complies with Apple guidelines.',
+      termsAS12: 'The app supports latest iOS versions.',
+      termsAS13: 'We handle crash reports responsibly.',
+      termsAS14: 'The app does not interfere with system functionality.',
+      termsAS15: 'Subscription terms are clearly disclosed before purchase.',
+      termsAD1: 'Advertisements comply with Google AdSense policies.',
+      termsAD2: 'We do not click on our own ads.',
+      termsAD3: 'Ad placement does not interfere with core functionality.',
+      termsAD4: 'Users can opt out of personalized advertising.',
+      termsAD5: 'We do not modify AdSense code unauthorized.',
+      termsAD6: 'Ad content is appropriate for the audience.',
+      termsAD7: 'We comply with GDPR and CCPA requirements.',
+      termsAD8: 'Sensitive ad categories are excluded.',
+      termsAD9: 'AdSense cookies are disclosed in our Privacy Policy.',
+      termsAD10: 'We do not place ads on empty pages.',
+      termsAD11: 'The number of ads does not exceed recommended limits.',
+      // Refund
+      refundIntro: 'At FleetOn, we want you to be completely satisfied. This policy outlines our refund and replacement procedures.',
+      refundEligibility: 'Eligibility',
+      refundEligibilityText: 'Refunds are available within 14 days of purchase if you have used less than 20% of your monthly allocation.',
+      refundProcess: 'Refund Process',
+      refundProcessText: 'Contact us at emadh5156@gmail.com with your account email and reason. We review requests within 5 business days.',
+      refundTimeline: 'Processing Time',
+      refundTimelineText: 'Approved refunds are processed within 7-14 business days to the original payment method.',
+      refundPartial: 'Partial Refunds',
+      refundPartialText: 'Mid-cycle cancellations may receive prorated credit toward the next billing period.',
+      refundReplacement: 'Service Replacement',
+      refundReplacementText: 'For unresolved technical issues within 48 hours, we may offer service extension or plan upgrade.',
+      refundCancellation: 'Cancellation',
+      refundCancellationText: 'Cancel anytime through app settings. Takes effect at end of billing period.',
+      refundExceptions: 'Exceptions',
+      refundExceptionsText: 'No refunds for: accounts terminated for violations, promotional plans, or after 14-day window.',
+      refundContact: 'Refund Contact',
+      refundContactText: 'For refund requests: emadh5156@gmail.com',
+      // About
+      aboutMissionText: 'FleetOn simplifies fleet management for businesses of all sizes with real-time tracking, maintenance scheduling, and team communication tools.',
+      aboutVisionText: 'To become the leading fleet management platform in the Middle East and beyond.',
+      aboutTeamText: 'Built by a dedicated team of developers and fleet management experts.',
+      aboutFeature1: 'Real-time GPS vehicle tracking',
+      aboutFeature2: 'Trip logging with odometer scanning',
+      aboutFeature3: 'Maintenance alerts & scheduling',
+      aboutFeature4: 'Team communication (voice & text)',
+      aboutFeature5: 'Multi-role access (Owner, Driver, Dispatcher, Maintenance, Accountant)',
+      aboutFeature6: 'Trip reports & cost analysis',
+      aboutFeature7: 'Dark & Light mode',
+      aboutFeature8: 'Arabic & English support (RTL)',
+      currentPlan: 'Pricing Plans',
+      // Settings link labels
+      privacyPolicy: 'Privacy Policy', terms: 'Terms of Service',
     },
     ar: {
       appName: 'FleetOn', tagline: 'منصة إدارة الأسطول',
@@ -472,6 +740,152 @@
       error: 'خطأ', success: 'نجاح', driverCode: 'كود السائقين', dispatcherCode: 'كود الدسباتشر',
       invalidCode: 'كود غير صحيح', codeExpired: 'الكود وصل للحد الأقصى',
       tripStarted: 'تم بدء الرحلة!', tripEnded: 'تم إنهاء الرحلة!', carAdded: 'تمت إضافة السيارة!', partAdded: 'تمت إضافة القطعة!',
+      // قانوني
+      privacyPolicy: 'سياسة الخصوصية', terms: 'شروط الاستخدام', aboutUs: 'من نحن', contact: 'تواصل معنا',
+      refundPolicy: 'سياسة الاسترجاع والاستبدال', lastUpdated: 'آخر تحديث', effectiveDate: 'تاريخ النفاذ',
+      // تواصل معنا
+      contactTitle: 'تواصل معنا', contactSubtitle: 'يسعدنا سماعك! أرسل لنا رسالة وسنرد عليك في أقرب وقت ممكن.',
+      contactName: 'اسمك', contactEmail: 'بريدك الإلكتروني', contactSubject: 'الموضوع', contactMessage: 'رسالتك',
+      contactSend: 'إرسال الرسالة', contactSuccess: 'تم إرسال الرسالة بنجاح!', contactError: 'فشل إرسال الرسالة.',
+      contactRequired: 'جميع الحقول مطلوبة', contactInfo: 'معلومات التواصل', contactDirectEmail: 'البريد المباشر',
+      contactResponse: 'نرد عادةً خلال 24-48 ساعة.',
+      // روابط متقاطعة
+      viewPrivacyPolicy: 'اطلع على سياسة الخصوصية', viewTerms: 'اطلع على شروط الخدمة', viewAboutUs: 'تعرف علينا أكثر',
+      viewRefund: 'اطلع على سياسة الاسترجاع والاستبدال', viewContact: 'تواصل معنا',
+      // الفوتر
+      aboutCopyright: '© 2024 FleetOn. جميع الحقوق محفوظة.', aboutMadeWith: 'صُنع بـ ❤️ لمدراء الأسطول في كل مكان',
+      // من نحن
+      aboutMission: 'مهمتنا', aboutVision: 'رؤيتنا', aboutStats: ' بالأرقام',
+      aboutStatVehicles: 'مركبة مُدارة', aboutStatTrips: 'رحلة مكتملة', aboutStatUsers: 'مستخدم نشط', aboutStatUptime: 'وقت التشغيل',
+      aboutFeatures: 'الميزات الرئيسية', aboutTeam: 'فريقنا', aboutContact: 'تواصل معنا', aboutVersion: 'الإصدار',
+      // الاسترجاع
+      refundTitle: 'سياسة الاسترجاع والاستبدال',
+      // الخصوصية
+      privacyIntro: 'يلتزم FleetOn بحماية خصوصيتك. توضح هذه السياسة كيفية جمعنا لمعلوماتك واستخدامها وحمايتها.',
+      privacyInfoCollected: 'المعلومات التي نجمعها',
+      privacyInfoCollectedText: 'نجمع المعلومات التي تقدمها مباشرة (الاسم، البريد، تفاصيل الشركة)، وبيانات الموقع، وسجلات المركبات والصيانة، وبيانات التواصل. كما نجمع معلومات الجهاز وتحليلات الاستخدام.',
+      privacyHowWeUse: 'كيف نستخدم معلوماتك',
+      privacyHowWeUseText: 'نستخدم بياناتك لتقديم خدمات إدارة الأسطول، وتتبع الرحلات، وإدارة الصيانة، والتواصل، وتحسين التطبيق.',
+      privacyDataSecurity: 'أمان البيانات',
+      privacyDataSecurityText: 'نطبق التشفير AES-256 والمصادقة الآمنة وأمان على مستوى الصف (RLS) ومراجعات أمنية دورية.',
+      privacyCookies: 'ملفات تعريف الارتباط',
+      privacyCookiesText: 'نستخدم ملفات تعريف الارتباط: الأساسية (المصادقة)، التحليلية (Google Analytics)، الإعلانية (Google AdSense)، والتفضيلية (اللغة، المظهر). يمكنك التحكم فيها من إعدادات المتصفح.',
+      privacyAds: 'الإعلانات و Google AdSense',
+      privacyAdsText: 'قد يعرض FleetOn إعلانات من Google AdSense. يستخدم ملفات تعريف الارتباط لتقديم إعلانات بناءً على زياراتك. يمكنك إلغاء الاشتراك من إعدادات إعلانات Google.',
+      privacyThirdParty: 'خدمات الطرف الثالث',
+      privacyThirdPartyText: 'نستخدم: Supabase (الخلفية)، Google Maps (الخرائط)، Expo وReact Native (الإطار)، Google AdSense (الإعلانات)، Google Analytics (التحليلات)، Firebase (الإشعارات).',
+      privacyThirdPartyDetailed: 'تفاصيل خدمات الطرف الثالث',
+      privacyThirdPartyDetailedText: 'Supabase: الخدمات الخلفية. الخصوصية: supabase.com/privacy\nGoogle Maps: خدمات الموقع. الخصوصية: policies.google.com/privacy\nGoogle AdSense: الإعلانات. الخصوصية: policies.google.com/privacy\nGoogle Analytics: التحليلات. الخصوصية: policies.google.com/privacy\nExpo: البنية التحتية. الخصوصية: expo.dev/privacy',
+      privacyDataRetention: 'الاحتفاظ بالبيانات',
+      privacyDataRetentionText: 'نحتفظ ببياناتك طالما كان حسابك نشطاً. بعد الحذف، نحتفظ ببعض البيانات لمدة 30 يوماً.',
+      privacyYourRights: 'حقوقك',
+      privacyYourRightsText: 'لديك الحق في الوصول أو تصحيح أو حذف بياناتك. يمكنك تصدير التقارير وإدارة الإعدادات في أي وقت.',
+      privacyChildren: 'خصوصية الأطفال',
+      privacyChildrenText: 'FleetOn غير مخصص لأقل من 16 عاماً. لا نجمع بيانات من الأطفال عمداً.',
+      privacyChanges: 'التغييرات على هذه السياسة',
+      privacyChangesText: 'قد نحدّث هذه السياسة من وقت لآخر. الاستمرار يعني القبول.',
+      privacyContact: 'تواصل معنا',
+      privacyContactText: 'للاستفسارات: emadh5156@gmail.com',
+      // الشروط
+      termsAcceptance: 'قبول الشروط',
+      termsAcceptanceText: 'باستخدام FleetOn، فإنك توافق على شروط الخدمة. تنطبق على جميع المستخدمين.',
+      termsDescription: 'وصف الخدمة',
+      termsDescriptionText: 'FleetOn منصة إدارة أسطول لتتبع المركبات وإدارة الرحلات وجدولة الصيانة والتواصل.',
+      termsAccount: 'حسابات المستخدمين',
+      termsAccountText: 'أنت مسؤول عن سرية بيانات حسابك.',
+      termsUsage: 'الاستخدام المقبول',
+      termsUsageText: 'استخدم FleetOn فقط لأغراض مشروعة. لا تسيء استخدام الخدمة.',
+      termsSubscription: 'الاشتراكات',
+      termsSubscriptionText: 'يقدم FleetOn باقات مجانية ومبتدئة ومؤسسية ومتقدمة. الفوترة شهرية لكل مركبة.',
+      termsLocation: 'بيانات الموقع',
+      termsLocationText: 'يستخدم FleetOn GPS لتتبع الرحلات. الموقع في الخلفية يحافظ على التتبع.',
+      termsIP: 'الملكية الفكرية',
+      termsIPText: 'جميع الحقوق في FleetOn تخص FleetOn. لا يجوز النسخ أو التعديل.',
+      termsTermination: 'الإنهاء',
+      termsTerminationText: 'قد نعلّق أو ننهي الحسابات بسبب الانتهاكات. يمكنك حذف حسابك في أي وقت.',
+      termsDisclaimer: 'إخلاء المسؤولية',
+      termsDisclaimerText: 'يتم تقديم FleetOn "كما هو" دون ضمانات.',
+      termsLiability: 'تحديد المسؤولية',
+      termsLiabilityText: 'لن يكون FleetOn مسؤولاً عن أضرار غير مباشرة.',
+      termsGoverning: 'القانون الحاكم',
+      termsGoverningText: 'تحكم هذه الشروط قوانين الولاية القضائية التي يعمل فيها FleetOn.',
+      termsGooglePlay: 'التوافق مع متجر Google Play',
+      termsAppStore: 'التوافق مع متجر Apple App Store',
+      termsAdSense: 'التوافق مع Google AdSense',
+      termsGP1: 'التطبيق يتوافق مع سياسات Google Play.',
+      termsGP2: 'لا نجمع أو نشارك بيانات شخصية زائدة عن الحاجة.',
+      termsGP3: 'التطبيق لا يحتوي على برwares ضارة.',
+      termsGP4: 'يتم جمع بيانات الموقع بموافقة صريحة فقط.',
+      termsGP5: 'التطبيق يوفر آلية لحذف الحساب والبيانات.',
+      termsGP6: 'لا نبيع البيانات لأطراف ثالثة.',
+      termsGP7: 'جميع الإعلانات تتوافق مع سياسات Google Play.',
+      termsGP8: 'الإشعارات للتنبيهات المتعلقة بالخدمة فقط.',
+      termsGP9: 'التطبيق يدعم تصنيفات المحتوى المناسبة.',
+      termsGP10: 'نتعامل مع البيانات وفقاً لسياسة العائلات.',
+      termsGP11: 'التطبيق خالٍ من السلوك المضلل.',
+      termsGP12: 'الشراء داخل التطبيق يتبع متطلبات Google.',
+      termsGP13: 'التطبيق يطلب الأذونات الضرورية فقط.',
+      termsGP14: 'نوفر رابط سياسة الخصوصية.',
+      termsGP15: 'التطبيق يحترم تفضيلات إلغاء الاشتراك.',
+      termsAS1: 'التطبيق يتوافق مع إرشادات Apple.',
+      termsAS2: 'الشراء داخل التطبيق يستخدم نظام Apple.',
+      termsAS3: 'التطبيق لا يصل لبيانات زائدة عن وظائفه.',
+      termsAS4: 'نوفر سياسة خصوصية واضحة.',
+      termsAS5: 'التطبيق لا يحتوي ميزات خفية.',
+      termsAS6: 'نحترم خصوصية المستخدم.',
+      termsAS7: 'التطبيق مناسب لتصنيف العمر.',
+      termsAS8: 'يتم الإفصاح عن استخدام الموقع في الخلفية.',
+      termsAS9: 'التطبيق لا يستخدم APIs خاصة.',
+      termsAS10: 'نوفر آلية لإدارة أو حذف الحسابات.',
+      termsAS11: 'جميع المحتويات تتوافق مع إرشادات Apple.',
+      termsAS12: 'يدعم التطبيق أحدث إصدارات iOS.',
+      termsAS13: 'نتعامل مع تقارير الأعطال بمسؤولية.',
+      termsAS14: 'التطبيق لا يؤثر على وظائف النظام.',
+      termsAS15: 'شروط الاشتراك موضحة قبل الشراء.',
+      termsAD1: 'الإعلانات تتوافق مع سياسات Google AdSense.',
+      termsAD2: 'لا ننقر على إعلاناتنا الخاصة.',
+      termsAD3: 'وضع الإعلانات لا يؤثر على الوظائف الأساسية.',
+      termsAD4: 'يمكن للمستخدمين إلغاء الاشتراك في الإعلانات المخصصة.',
+      termsAD5: 'لا نعدّل كود AdSense.',
+      termsAD6: 'محتوى الإعلانات مناسب للجمهور.',
+      termsAD7: 'نتوافق مع متطلبات GDPR و CCPA.',
+      termsAD8: 'الفئات الحساسة مستبعدة من الإعلانات.',
+      termsAD9: 'ملفات تعريف الارتباط مذكورة في سياسة الخصوصية.',
+      termsAD10: 'لا نضع إعلانات على صفحات فارغة.',
+      termsAD11: 'عدد الإعلانات لا يتجاوز الحدود الموصى بها.',
+      // الاسترجاع
+      refundIntro: 'في FleetOn، نريدك راضياً تماماً. توضح هذه السياسة إجراءات الاسترجاع والاستبدال.',
+      refundEligibility: 'أهلية الاسترجاع',
+      refundEligibilityText: 'يتوفر الاسترجاع خلال 14 يوماً إذا لم تستخدم أكثر من 20% من الحصة الشهرية.',
+      refundProcess: 'إجراءات الاسترجاع',
+      refundProcessText: 'تواصل معنا على emadh5156@gmail.com مع بريد حسابك وسبب الاسترجاع.',
+      refundTimeline: 'مدة المعالجة',
+      refundTimelineText: 'تتم المعالجة خلال 7-14 يوم عمل إلى طريقة الدفع الأصلية.',
+      refundPartial: 'الاسترجاعجزئي',
+      refundPartialText: 'الإلغاء في منتصف الدورة قد يحصل على رصيد محسوب نسبياً.',
+      refundReplacement: 'استبدال الخدمة',
+      refundReplacementText: 'للمشاكل التقنية غير المحلولة خلال 48 ساعة، قد نقدم تمديد أو ترقية.',
+      refundCancellation: 'الإلغاء',
+      refundCancellationText: 'يمكنك الإلغاء في أي وقت من الإعدادات. ي生效 في نهاية فترة الفوترة.',
+      refundExceptions: 'الاستثناءات',
+      refundExceptionsText: 'لا استرجاع للحسابات المنتهية أو الباقات الترويجية أو بعد 14 يوماً.',
+      refundContact: 'التواصل للاسترجاع',
+      refundContactText: 'لطلبات الاسترجاع: emadh5156@gmail.com',
+      // من نحن
+      aboutMissionText: 'يُبسّط FleetOn إدارة الأسطول بأدوات التتبع والصيانة والتواصل.',
+      aboutVisionText: 'أن نصبح منصة إدارة الأسطول الرائدة في الشرق الأوسط.',
+      aboutTeamText: 'يبنيه فريق متخصص من المطورين وخبراء إدارة الأسطول.',
+      aboutFeature1: 'تتبع المركبات عبر GPS في الوقت الفعلي',
+      aboutFeature2: 'تسجيل الرحلات مع تصوير العداد',
+      aboutFeature3: 'تنبيهات وجدولة الصيانة',
+      aboutFeature4: 'التواصل بين الفريق (صوتي ونصي)',
+      aboutFeature5: 'وصول متعدد الأدوار',
+      aboutFeature6: 'تقارير الرحلات وتحليل التكاليف',
+      aboutFeature7: 'الوضع الداكن والفاتح',
+      aboutFeature8: 'دعم العربية والإنجليزية',
+      currentPlan: 'باقات الأسعار',
+      // روابط الإعدادات
+      privacyPolicy: 'سياسة الخصوصية', terms: 'شروط الاستخدام',
     }
   };
   
@@ -490,6 +904,14 @@
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     localStorage.setItem('fleeton_lang', currentLang);
     applyLang();
+    // Re-render current legal page
+    const cp = document.querySelector('.page:not(.hidden)');
+    if (cp) {
+      if (cp.id === 'privacyPage') renderPrivacy();
+      else if (cp.id === 'termsPage') renderTerms();
+      else if (cp.id === 'refundPage') renderRefund();
+      else if (cp.id === 'aboutPage') renderAbout();
+    }
   };
   
   // ==================== STATE ====================
@@ -891,7 +1313,156 @@
     document.getElementById('showDispatcherCode').textContent = currentUser.company?.dispatcher_code || '—';
     showModal('codesModal');
   };
-  
+
+  // ==================== LEGAL PAGES ====================
+  let previousPage = null;
+
+  window.goBack = () => {
+    if (previousPage) { showPage(previousPage); previousPage = null; }
+    else if (currentUser) loadDashboard();
+    else showPage('loginPage');
+  };
+
+  function renderLegalLinks(containerId) {
+    document.getElementById(containerId).innerHTML = `
+      <a href="#" onclick="showLegalPage('privacy')">🔒 ${t('viewPrivacyPolicy')}</a>
+      <a href="#" onclick="showLegalPage('terms')">📄 ${t('viewTerms')}</a>
+      <a href="#" onclick="showLegalPage('refund')">💰 ${t('viewRefund')}</a>
+      <a href="#" onclick="showLegalPage('about')">ℹ️ ${t('viewAboutUs')}</a>
+      <a href="#" onclick="showLegalPage('contact')">📬 ${t('viewContact')}</a>
+    `;
+  }
+
+  function renderFooter(containerId) {
+    document.getElementById(containerId).innerHTML = `
+      <div>${t('aboutCopyright')}</div>
+      <div class="made">${t('aboutMadeWith')}</div>
+    `;
+  }
+
+  function sec(title, text) {
+    return `<div class="sec"><div class="sec-title">${title}</div><div class="sec-text">${text}</div></div>`;
+  }
+
+  function numList(title, items) {
+    return `<div class="sec"><div class="sec-title">${title}</div>${items.map((item, i) =>
+      `<div class="num-item"><span class="n">${i+1}.</span><span class="t">${item}</span></div>`
+    ).join('')}</div>`;
+  }
+
+  window.showLegalPage = (page) => {
+    const currentPage = document.querySelector('.page:not(.hidden)');
+    if (currentPage && !['privacyPage','termsPage','refundPage','aboutPage','contactPage'].includes(currentPage.id)) {
+      previousPage = currentPage.id;
+    }
+    switch(page) {
+      case 'privacy': renderPrivacy(); showPage('privacyPage'); break;
+      case 'terms': renderTerms(); showPage('termsPage'); break;
+      case 'refund': renderRefund(); showPage('refundPage'); break;
+      case 'about': renderAbout(); showPage('aboutPage'); break;
+      case 'contact': showPage('contactPage'); break;
+    }
+  };
+
+  function renderPrivacy() {
+    const isAr = currentLang === 'ar';
+    let html = '';
+    html += sec(t('privacyIntro').split('.')[0], t('privacyIntro'));
+    html += sec(t('privacyInfoCollected'), t('privacyInfoCollectedText'));
+    html += sec(t('privacyHowWeUse'), t('privacyHowWeUseText'));
+    html += sec(t('privacyDataSecurity'), t('privacyDataSecurityText'));
+    html += sec(t('privacyCookies'), t('privacyCookiesText'));
+    html += sec(t('privacyAds'), t('privacyAdsText'));
+    html += sec(t('privacyThirdParty'), t('privacyThirdPartyText'));
+    html += sec(t('privacyThirdPartyDetailed'), t('privacyThirdPartyDetailedText'));
+    html += sec(t('privacyDataRetention'), t('privacyDataRetentionText'));
+    html += sec(t('privacyYourRights'), t('privacyYourRightsText'));
+    html += sec(t('privacyChildren'), t('privacyChildrenText'));
+    html += sec(t('privacyChanges'), t('privacyChangesText'));
+    html += sec(t('privacyContact'), t('privacyContactText'));
+    document.getElementById('privacyContent').innerHTML = html;
+    renderLegalLinks('privacyLinks');
+    renderFooter('privacyFooter');
+  }
+
+  function renderTerms() {
+    let html = '';
+    html += sec(t('termsAcceptance'), t('termsAcceptanceText'));
+    html += sec(t('termsDescription'), t('termsDescriptionText'));
+    html += sec(t('termsAccount'), t('termsAccountText'));
+    html += sec(t('termsUsage'), t('termsUsageText'));
+    html += sec(t('termsSubscription'), t('termsSubscriptionText'));
+    html += sec(t('termsLocation'), t('termsLocationText'));
+    html += sec(t('termsIP'), t('termsIPText'));
+    html += sec(t('termsTermination'), t('termsTerminationText'));
+    html += sec(t('termsDisclaimer'), t('termsDisclaimerText'));
+    html += sec(t('termsLiability'), t('termsLiabilityText'));
+    html += sec(t('termsGoverning'), t('termsGoverningText'));
+    const gp = [t('termsGP1'),t('termsGP2'),t('termsGP3'),t('termsGP4'),t('termsGP5'),t('termsGP6'),t('termsGP7'),t('termsGP8'),t('termsGP9'),t('termsGP10'),t('termsGP11'),t('termsGP12'),t('termsGP13'),t('termsGP14'),t('termsGP15')];
+    const as = [t('termsAS1'),t('termsAS2'),t('termsAS3'),t('termsAS4'),t('termsAS5'),t('termsAS6'),t('termsAS7'),t('termsAS8'),t('termsAS9'),t('termsAS10'),t('termsAS11'),t('termsAS12'),t('termsAS13'),t('termsAS14'),t('termsAS15')];
+    const ad = [t('termsAD1'),t('termsAD2'),t('termsAD3'),t('termsAD4'),t('termsAD5'),t('termsAD6'),t('termsAD7'),t('termsAD8'),t('termsAD9'),t('termsAD10'),t('termsAD11')];
+    html += numList('🏪 ' + t('termsGooglePlay'), gp);
+    html += numList('🍎 ' + t('termsAppStore'), as);
+    html += numList('📢 ' + t('termsAdSense'), ad);
+    document.getElementById('termsContent').innerHTML = html;
+    renderLegalLinks('termsLinks');
+    renderFooter('termsFooter');
+  }
+
+  function renderRefund() {
+    let html = '';
+    html += sec(t('refundIntro').split('.')[0], t('refundIntro'));
+    html += sec(t('refundEligibility'), t('refundEligibilityText'));
+    html += sec(t('refundProcess'), t('refundProcessText'));
+    html += sec(t('refundTimeline'), t('refundTimelineText'));
+    html += sec(t('refundPartial'), t('refundPartialText'));
+    html += sec(t('refundReplacement'), t('refundReplacementText'));
+    html += sec(t('refundCancellation'), t('refundCancellationText'));
+    html += sec(t('refundExceptions'), t('refundExceptionsText'));
+    html += sec(t('refundContact'), t('refundContactText'));
+    document.getElementById('refundContent').innerHTML = html;
+    renderLegalLinks('refundLinks');
+    renderFooter('refundFooter');
+  }
+
+  function renderAbout() {
+    let html = '';
+    html += sec('🎯 ' + t('aboutMission'), t('aboutMissionText'));
+    html += sec('🔭 ' + t('aboutVision'), t('aboutVisionText'));
+    html += `<div class="sec"><div class="sec-title">📊 ${t('aboutStats')}</div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="emoji">🚗</div><div class="num">500+</div><div class="lbl">${t('aboutStatVehicles')}</div></div>
+        <div class="stat-card"><div class="emoji">📋</div><div class="num">10K+</div><div class="lbl">${t('aboutStatTrips')}</div></div>
+        <div class="stat-card"><div class="emoji">👥</div><div class="num">200+</div><div class="lbl">${t('aboutStatUsers')}</div></div>
+        <div class="stat-card"><div class="emoji">⚡</div><div class="num">99.9%</div><div class="lbl">${t('aboutStatUptime')}</div></div>
+      </div></div>`;
+    const features = [t('aboutFeature1'),t('aboutFeature2'),t('aboutFeature3'),t('aboutFeature4'),t('aboutFeature5'),t('aboutFeature6'),t('aboutFeature7'),t('aboutFeature8')];
+    html += `<div class="sec"><div class="sec-title">✨ ${t('aboutFeatures')}</div>${features.map(f => `<div style="color:var(--text2);margin-bottom:6px">• ${f}</div>`).join('')}</div>`;
+    html += sec('👥 ' + t('aboutTeam'), t('aboutTeamText'));
+    html += `<div class="sec"><div class="sec-title">💰 ${t('currentPlan')}</div>
+      ${[{n:'Free Trial',p:'$0',c:'1 car',d:'7 days'},{n:'Starter',p:'$10/car/mo',c:'5 cars',d:''},{n:'Business',p:'$18/car/mo',c:'30 cars',d:''},{n:'Enterprise',p:'$25/car/mo',c:'Unlimited',d:'+ API'}].map(pl => `
+        <div class="card" style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-weight:700">${pl.n}</div><div style="font-size:12px;color:var(--text3)">${pl.c} ${pl.d ? '• '+pl.d : ''}</div></div><div style="color:var(--primary);font-weight:700">${pl.p}</div></div>
+      `).join('')}</div>`;
+    document.getElementById('aboutContent').innerHTML = html;
+    renderLegalLinks('aboutLinks');
+    renderFooter('aboutFooter');
+  }
+
+  window.handleContactSend = () => {
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const subject = document.getElementById('contactSubject').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+    if (!name || !email || !subject || !message) { toast(t('contactRequired'), 'error'); return; }
+    const mailUrl = `mailto:emadh5156@gmail.com?subject=${encodeURIComponent('[FleetOn] ' + subject)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message)}`;
+    window.location.href = mailUrl;
+    toast(t('contactSuccess'), 'success');
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactSubject').value = '';
+    document.getElementById('contactMessage').value = '';
+  };
+
   // ==================== INIT ====================
   window.addEventListener('load', async () => {
     applyLang();

@@ -1,4 +1,4 @@
-// FleetOn — About Us Screen
+// FleetOn — About Us Screen (enhanced with Vision + Statistics + Cross-links)
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -18,6 +18,13 @@ export default function AboutUsScreen({ navigation }) {
     i18n.t('aboutFeature6'),
     i18n.t('aboutFeature7'),
     i18n.t('aboutFeature8'),
+  ];
+
+  const stats = [
+    { emoji: '🚗', number: '500+', label: i18n.t('aboutStatVehicles') },
+    { emoji: '📋', number: '10K+', label: i18n.t('aboutStatTrips') },
+    { emoji: '👥', number: '200+', label: i18n.t('aboutStatUsers') },
+    { emoji: '⚡', number: '99.9%', label: i18n.t('aboutStatUptime') },
   ];
 
   return (
@@ -44,6 +51,26 @@ export default function AboutUsScreen({ navigation }) {
           <Text style={s.sectionText}>{i18n.t('aboutMissionText')}</Text>
         </View>
 
+        {/* Vision */}
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>🔭 {i18n.t('aboutVision')}</Text>
+          <Text style={s.sectionText}>{i18n.t('aboutVisionText')}</Text>
+        </View>
+
+        {/* Statistics */}
+        <View style={s.section}>
+          <Text style={s.sectionTitle}>📊 {i18n.t('aboutStats')}</Text>
+          <View style={s.statsGrid}>
+            {stats.map((stat, idx) => (
+              <View key={idx} style={s.statCard}>
+                <Text style={s.statEmoji}>{stat.emoji}</Text>
+                <Text style={s.statNumber}>{stat.number}</Text>
+                <Text style={s.statLabel}>{stat.label}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
         {/* Features */}
         <View style={s.section}>
           <Text style={s.sectionTitle}>✨ {i18n.t('aboutFeatures')}</Text>
@@ -66,9 +93,9 @@ export default function AboutUsScreen({ navigation }) {
           <Text style={s.sectionTitle}>📬 {i18n.t('aboutContact')}</Text>
           <Text style={s.sectionText}>{i18n.t('aboutContactText')}</Text>
 
-          <TouchableOpacity style={s.contactRow} onPress={() => Linking.openURL('mailto:support@fleeton.app')}>
+          <TouchableOpacity style={s.contactRow} onPress={() => Linking.openURL('mailto:emadh5156@gmail.com')}>
             <Text style={s.contactEmoji}>📧</Text>
-            <Text style={s.contactText}>support@fleeton.app</Text>
+            <Text style={s.contactText}>emadh5156@gmail.com</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={s.contactRow} onPress={() => Linking.openURL('https://fleeton.app')}>
@@ -94,6 +121,22 @@ export default function AboutUsScreen({ navigation }) {
               <Text style={s.planPrice}>{plan.price}</Text>
             </View>
           ))}
+        </View>
+
+        {/* Cross-links */}
+        <View style={s.crossLinks}>
+          <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy')}>
+            <Text style={s.linkText}>🔒 {i18n.t('viewPrivacyPolicy')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('TermsOfService')}>
+            <Text style={s.linkText}>📄 {i18n.t('viewTerms')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('RefundPolicy')}>
+            <Text style={s.linkText}>💰 {i18n.t('viewRefund')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('ContactUs')}>
+            <Text style={s.linkText}>📬 {i18n.t('viewContact')}</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Footer */}
@@ -125,6 +168,14 @@ const styles = (COLORS) => StyleSheet.create({
   featureRow: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: SPACING.sm },
   featureBullet: { color: COLORS.primary, fontSize: FONTS.sizes.lg, marginRight: SPACING.md, marginTop: 2 },
   featureText: { color: COLORS.textSecondary, fontSize: FONTS.sizes.md, flex: 1, lineHeight: 22 },
+  statsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
+  statCard: {
+    flex: 1, minWidth: '45%', backgroundColor: COLORS.surface, borderRadius: RADIUS.lg,
+    padding: SPACING.lg, alignItems: 'center', borderWidth: 1, borderColor: COLORS.border,
+  },
+  statEmoji: { fontSize: 28, marginBottom: SPACING.xs },
+  statNumber: { color: COLORS.primary, fontSize: FONTS.sizes.xxl, fontWeight: FONTS.weights.bold },
+  statLabel: { color: COLORS.textMuted, fontSize: FONTS.sizes.xs, marginTop: 2, textAlign: 'center' },
   contactRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: COLORS.surface, borderRadius: RADIUS.lg, padding: SPACING.lg, marginTop: SPACING.md, borderWidth: 1, borderColor: COLORS.border },
   contactEmoji: { fontSize: 20, marginRight: SPACING.md },
   contactText: { color: COLORS.primary, fontSize: FONTS.sizes.md, fontWeight: FONTS.weights.medium },
@@ -133,7 +184,11 @@ const styles = (COLORS) => StyleSheet.create({
   planName: { color: COLORS.textPrimary, fontSize: FONTS.sizes.md, fontWeight: FONTS.weights.semibold },
   planCars: { color: COLORS.textMuted, fontSize: FONTS.sizes.xs, marginTop: 2 },
   planPrice: { color: COLORS.primary, fontSize: FONTS.sizes.md, fontWeight: FONTS.weights.bold },
-  footer: { alignItems: 'center', marginTop: SPACING.xxl, paddingTop: SPACING.xxl, borderTopWidth: 1, borderTopColor: COLORS.border },
+  crossLinks: {
+    marginBottom: SPACING.xxl, paddingTop: SPACING.xxl, borderTopWidth: 1, borderTopColor: COLORS.border,
+  },
+  linkText: { color: COLORS.primary, fontSize: FONTS.sizes.md, marginBottom: SPACING.md, fontWeight: FONTS.weights.medium },
+  footer: { alignItems: 'center', marginTop: SPACING.lg, paddingTop: SPACING.xxl, borderTopWidth: 1, borderTopColor: COLORS.border },
   footerText: { color: COLORS.textMuted, fontSize: FONTS.sizes.sm },
   footerMade: { color: COLORS.textMuted, fontSize: FONTS.sizes.sm, marginTop: SPACING.xs },
 });

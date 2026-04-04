@@ -1,4 +1,4 @@
-// FleetOn — Navigation Configuration (updated with legal pages)
+// FleetOn — Navigation Configuration (updated with ContactUs + RefundPolicy)
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -30,6 +30,8 @@ import AddPartScreen from '../screens/AddPartScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import TermsOfServiceScreen from '../screens/TermsOfServiceScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
+import ContactUsScreen from '../screens/ContactUsScreen';
+import RefundPolicyScreen from '../screens/RefundPolicyScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -196,6 +198,8 @@ export default function Navigation({ user }) {
             <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
             <Stack.Screen name="TermsOfService" component={TermsOfServiceScreen} />
             <Stack.Screen name="AboutUs" component={AboutUsScreen} />
+            <Stack.Screen name="ContactUs" component={ContactUsScreen} />
+            <Stack.Screen name="RefundPolicy" component={RefundPolicyScreen} />
           </>
         )}
       </Stack.Navigator>

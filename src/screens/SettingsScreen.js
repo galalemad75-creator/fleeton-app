@@ -1,4 +1,4 @@
-// FleetOn — Settings Screen (updated with theme toggle + legal pages)
+// FleetOn — Settings Screen (updated with refund + contact links)
 import React, { useEffect, useState } from 'react';
 import {
   View, Text, TouchableOpacity, StyleSheet,
@@ -132,6 +132,12 @@ export default function SettingsScreen({ navigation }) {
           type: 'button',
           onPress: () => navigation.navigate('TermsOfService'),
         },
+        {
+          icon: '💰',
+          label: i18n.t('refundPolicy'),
+          type: 'button',
+          onPress: () => navigation.navigate('RefundPolicy'),
+        },
       ],
     },
     {
@@ -144,16 +150,10 @@ export default function SettingsScreen({ navigation }) {
           onPress: () => navigation.navigate('AboutUs'),
         },
         {
-          icon: '🆘',
-          label: i18n.t('support'),
-          type: 'button',
-          onPress: () => {},
-        },
-        {
           icon: '💬',
           label: i18n.t('contact'),
           type: 'button',
-          onPress: () => {},
+          onPress: () => navigation.navigate('ContactUs'),
         },
       ],
     },
